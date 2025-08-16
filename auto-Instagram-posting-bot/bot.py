@@ -87,14 +87,15 @@ def generate_card(confession_text: str, output_path="confession_card.jpg") -> st
         font = ImageFont.truetype(FONT_PATH, font_size)
         wrapped = textwrap.fill(confession_text, width=35)
         lines = wrapped.split("\n")
-        total_h = sum(draw.textsize(line, font=font)[1] + LINE_SPACING for line in lines)
+        total_h = sum(font.getbbox(line)[3] + LINE_SPACING for line in lines)
         if total_h <= MAX_HEIGHT:
             break
         font_size -= 2
 
     y = (template.height - total_h) // 2
     for line in lines:
-        w, h = draw.textsize(line, font=font)
+        bbox = font.getbbox(line)
+        w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
         x = (template.width - w) // 2
         draw.text((x, y), line, font=font, fill=(255, 255, 255))
         y += h + LINE_SPACING
