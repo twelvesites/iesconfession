@@ -5,6 +5,7 @@ from instagrapi import Client
 from PIL import Image, ImageDraw, ImageFont
 import firebase_admin
 from firebase_admin import credentials, firestore
+import base64
 
 # --------------------------
 # Instagram credentials from GitHub Actions secrets
@@ -28,13 +29,11 @@ else:
     print("Logged in and saved session!")
 
 # --------------------------
-# Firebase setup from GitHub secret
+# Firebase setup from GitHub secret (base64 encoded)
 # --------------------------
-firebase_json_str = os.environ.get("FIREBASE_JSON")
-
-# Clean up extra quotes/line breaks in secret
-firebase_json_str = firebase_json_str.strip().replace("\n", "").replace("\\n", "\n")
-cred_dict = json.loads(firebase_json_str)
+firebase_json_b64 = os.environ.get("FIREBASE_JSON")
+firebase_json_bytes = base64.b64decode(firebase_json_b64)
+cred_dict = json.loads(firebase_json_bytes)
 
 cred = credentials.Certificate(cred_dict)
 firebase_admin.initialize_app(cred)
