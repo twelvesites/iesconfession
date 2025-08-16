@@ -1,38 +1,30 @@
-name: Auto Instagram Posting
+name: Auto Post Instagram
 
 on:
   schedule:
-    - cron: "0 * * * *"  # every hour
+    - cron: '0 12 * * *' # every day at 12:00 UTC
   workflow_dispatch:
 
 jobs:
   post-confessions:
     runs-on: ubuntu-latest
-
+    env:
+      IG_USERNAME: ${{ secrets.IG_USERNAME }}
+      IG_PASSWORD: ${{ secrets.IG_PASSWORD }}
+      FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
     steps:
       - uses: actions/checkout@v3
 
-      # Install system dependencies for Pillow
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libtiff5-dev tk-dev tcl-dev python3-dev
-
-      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.12
+          python-version: '3.12'
 
-      # Install Python dependencies
-      - name: Install Python dependencies
+      - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r auto-Instagram-posting-bot/requirements.txt
-          python -m pip install instagrapi pyotp firebase-admin  # install firebase_admin too
+          python3 -m pip install --upgrade pip
+          pip install -r auto-Instagram-posting-bot/requirements.txt
+          pip install instagrapi pyotp firebase-admin
 
-      # Run the bot
-      - name: Run Instagram bot
+      - name: Run bot
         run: python3 auto-Instagram-posting-bot/bot.py
-        env:
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
