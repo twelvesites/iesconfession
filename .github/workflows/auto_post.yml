@@ -1,9 +1,9 @@
-name: Auto Post Confessions
+name: Auto Instagram Posting
 
 on:
   schedule:
-    - cron: '0 * * * *'  # runs every hour
-  workflow_dispatch:  # manual trigger
+    - cron: "0 * * * *"  # every hour, change as needed
+  workflow_dispatch:   # manual trigger
 
 jobs:
   post-confessions:
@@ -12,20 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.12
 
-      # Install dependencies
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install -r auto-Instagram-posting-bot/requirements.txt
-          python3 -m pip install instagrapi pyotp Pillow
+          python -m pip install --upgrade pip
+          python -m pip install -r auto-Instagram-posting-bot/requirements.txt
 
-      # Run bot
       - name: Run bot
         run: python3 auto-Instagram-posting-bot/bot.py
         env:
