@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <title>Reply - IES TEA</title>
+
+</head>
+<style>
+  .confession-box {
+      height: auto !important; /* make it square */
+       box-sizing: border-box;
+    }
+</style>
+<body>
+
+   <div class="navbar">
+        <a href="index.html"><img src="images/logo.png" alt="twelve"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Feedback</a>
+        </div>
+  </div>
+  
+
+  <div id="head">
+    <button class="back-btn" onclick="window.history.back()">Go Back</button>
+    <h1 id="head-text" style="margin-top: 10px;">Reply</h1>
+  </div>
+
+  <section id="content">
+    <div id="post">Loading confession...</div>
+    <div id="loading" style="text-align:center; padding: 2em;">
+  <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="60" />
+</div>
+
+  <hr>
+  <h3>Replies</h3>
+  <div id="replies">Loading replies...</div>
+  <div id="loading" style="text-align:center; padding: 2em;">
+  <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="60" />
+</div>
+
+<br><br><br>
+  <div id="chatInputWrapper">
+  <textarea id="replyInput" rows="1" placeholder="Write a reply..."></textarea>
+  <button id="sendReply" disabled>Send</button>
+</div>
+
+
+  <div id="modal"></div>
+  </section>
+
+<script type="module" src="js/reply.js"></script>
+
+
+
+
+
+
+
+</body>
+</html>

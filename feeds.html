@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <title>Feeds - IES TEA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+</head>
+<body>
+
+ <div class="navbar">
+        <a href="index.html"><img src="images/logo.png" alt="twelve"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Feedback</a>
+        </div>
+  </div>
+
+
+<h1 id="head-text">Confessions</h1>
+<p class="descript">AI-Powered Confessions to provide safe environment to the students.</p>
+<div id="confessionFeed" aria-label="Confession feed"></div>
+<br>
+
+<div id="modalOverlay" style="display: none;">
+  <div id="modalBox">
+    <div id="modalText">Something went wrong!</div>
+    <button id="modalClose">Okay</button>
+  </div>
+</div>
+
+
+<div id="inputBar" aria-label="New confession input">
+  <textarea id="confessionInput" placeholder="Type your confession..." aria-label="Confession input"></textarea>
+  <button id="sendBtn" disabled>Send</button>
+</div>
+<div id="modal">
+  <div id="modalMessage" style="font-weight: 600; color: #e11d48;""></div>
+</div>
+
+<script type="module" src="js/feeds.js">
+</script>
+
+
+<script>
+function showModal(message) {
+  const modal = document.getElementById('modal');
+  const modalMessage = document.getElementById('modalMessage');
+  if (!modal || !modalMessage) {
+    console.error('Modal elements missing in HTML!');
+    return;
+  }
+  modalMessage.textContent = message;
+  modal.style.display = 'block';
+  clearTimeout(showModal.hideTimeout);
+  showModal.hideTimeout = setTimeout(() => {
+    modal.style.display = 'none';
+  }, 3500);
+}
+</script>
+
+
+
+
+
+
+</body>
+</html>
