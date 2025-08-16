@@ -27,5 +27,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install instagrapi Pillow firebase-admin google-cloud-firestore
 
-      - name: Run bot
-        run: python bot.py
+      - name: Run Instagram Bot
+        run: python3 auto-Instagram-posting-bot/bot.py
+
