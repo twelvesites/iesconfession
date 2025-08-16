@@ -7,12 +7,25 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 # --------------------------
-# Instagram saved session
+# Instagram credentials from GitHub Actions secrets
 # --------------------------
-SESSION_PATH = "auto-Instagram-posting-bot/ig_session.json"
+IG_USERNAME = os.environ.get("IG_USERNAME")
+IG_PASSWORD = os.environ.get("IG_PASSWORD")
+SESSION_FILE = "auto-Instagram-posting-bot/ig_session.json"
+
+# --------------------------
+# Login to Instagram using saved session
+# --------------------------
 cl = Client()
-cl.load_settings(SESSION_PATH)
-print("Loaded Instagram session successfully!")
+
+if os.path.exists(SESSION_FILE):
+    cl.load_settings(SESSION_FILE)
+    cl.login(IG_USERNAME, IG_PASSWORD)  # ensures session is valid
+    print("Logged in using saved session!")
+else:
+    cl.login(IG_USERNAME, IG_PASSWORD)
+    cl.dump_settings(SESSION_FILE)  # save session for next time
+    print("Logged in and saved session!")
 
 # --------------------------
 # Firebase setup from GitHub secret
@@ -40,6 +53,7 @@ LINE_SPACING = 10
 def generate_card(confession_text, output_path="confession_card.png"):
     template = Image.open(TEMPLATE_PATH).convert("RGB")
     draw = ImageDraw.Draw(template)
+
     wrapped_text = textwrap.fill(confession_text, width=35)
     font_size = FONT_SIZE
     font = ImageFont.truetype(FONT_PATH, font_size)
@@ -53,6 +67,7 @@ def generate_card(confession_text, output_path="confession_card.png"):
         font = ImageFont.truetype(FONT_PATH, font_size)
 
     y_start = (template.height - total_height) // 2
+
     for line in lines:
         w, h = draw.textsize(line, font=font)
         x = (template.width - w) // 2
@@ -91,7 +106,3 @@ def post_new_confessions():
 if __name__ == "__main__":
     post_new_confessions()
     print("All new confessions processed!")
-
-    # Save updated session for future runs
-    cl.dump_settings(SESSION_PATH)
-    print("Session saved!")
