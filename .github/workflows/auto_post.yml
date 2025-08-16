@@ -2,8 +2,8 @@ name: Auto Instagram Posting
 
 on:
   schedule:
-    - cron: "0 * * * *"  # every hour, change as needed
-  workflow_dispatch:   # manual trigger
+    - cron: "0 * * * *"  # every hour
+  workflow_dispatch:
 
 jobs:
   post-confessions:
@@ -12,12 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install system dependencies for Pillow
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libtiff5-dev tk-dev tcl-dev
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.12
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r auto-Instagram-posting-bot/requirements.txt
