@@ -57,8 +57,8 @@ if not FIREBASE_JSON:
 cred_dict = json.loads(FIREBASE_JSON)
 
 # 🔥 FIX: Replace literal \n with real newlines for PEM key
-if 'private_key' in cred_dict:
-    cred_dict['private_key'] = cred_dict['private_key'].replace("\\n", "\n")
+if "private_key" in cred_dict:
+    cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
 
 cred = credentials.Certificate(cred_dict)
 if not firebase_admin._apps:
