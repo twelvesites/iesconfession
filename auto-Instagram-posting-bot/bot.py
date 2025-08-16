@@ -1,128 +1,130 @@
 import os
 import json
 import textwrap
+import warnings
+from pathlib import Path
 from instagrapi import Client
 from PIL import Image, ImageDraw, ImageFont
 import firebase_admin
 from firebase_admin import credentials, firestore
 
 # --------------------------
-# Instagram credentials from GitHub Actions secrets
+# Silence noisy warnings
+# --------------------------
+warnings.filterwarnings(
+    "ignore", category=UserWarning, module="google.cloud.firestore_v1.base_collection"
+)
+
+# --------------------------
+# Instagram setup
 # --------------------------
 IG_USERNAME = os.environ.get("IG_USERNAME")
 IG_PASSWORD = os.environ.get("IG_PASSWORD")
-SESSION_FILE = "auto-Instagram-posting-bot/ig_session.json"
+SESSION_FILE = Path("ig_session.json")
 
-# --------------------------
-# Login to Instagram using saved session
-# --------------------------
 cl = Client()
 
-try:
-    if os.path.exists(SESSION_FILE):
-        cl.load_settings(SESSION_FILE)
-        try:
-            cl.login(IG_USERNAME, IG_PASSWORD)
-            print("Logged in using saved session!")
-        except Exception as e:
-            print("Warning: Could not login with session. Skipping Instagram posts.", e)
-    else:
+if SESSION_FILE.exists():
+    try:
+        cl.load_settings(str(SESSION_FILE))
         cl.login(IG_USERNAME, IG_PASSWORD)
-        cl.dump_settings(SESSION_FILE)
-        print("Logged in and saved session!")
-except Exception as e:
-    print("Instagram login skipped due to CI restrictions:", e)
-    cl = None  # Mark Instagram client as unavailable
+        print("✅ Logged in using saved session")
+    except Exception:
+        print("⚠️ Session file invalid, re-logging in...")
+        cl.login(IG_USERNAME, IG_PASSWORD)
+        cl.dump_settings(str(SESSION_FILE))
+else:
+    cl.login(IG_USERNAME, IG_PASSWORD)
+    cl.dump_settings(str(SESSION_FILE))
+    print("✅ Logged in and saved session")
 
 # --------------------------
-# Firebase setup from GitHub secret
+# Firebase setup
 # --------------------------
+firebase_json_str = os.environ.get("FIREBASE_JSON")
+if not firebase_json_str:
+    raise RuntimeError("❌ FIREBASE_JSON secret not set!")
+
 try:
-    firebase_json_str = os.environ.get("FIREBASE_JSON")
     cred_dict = json.loads(firebase_json_str)
-    cred = credentials.Certificate(cred_dict)
+except json.JSONDecodeError:
+    # handle GitHub escaping issues
+    cred_dict = json.loads(firebase_json_str.strip())
+
+cred = credentials.Certificate(cred_dict)
+
+if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
-    db = firestore.client()
-    print("Connected to Firebase Firestore!")
-except Exception as e:
-    print("Firebase initialization failed:", e)
-    db = None
+
+db = firestore.client()
+print("✅ Connected to Firebase")
 
 # --------------------------
-# Template settings
+# Template / font settings
 # --------------------------
 TEMPLATE_PATH = "template.png"
 FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-MAX_WIDTH = 900
-MAX_HEIGHT = 900
-FONT_SIZE = 48
 LINE_SPACING = 10
+MAX_HEIGHT = 900
 
-# --------------------------
-# Generate confession card
-# --------------------------
-def generate_card(confession_text, output_path="confession_card.png"):
+
+def generate_card(confession_text: str, output_path="confession_card.jpg") -> str:
     template = Image.open(TEMPLATE_PATH).convert("RGB")
     draw = ImageDraw.Draw(template)
 
-    wrapped_text = textwrap.fill(confession_text, width=35)
-    font_size = FONT_SIZE
-    font = ImageFont.truetype(FONT_PATH, font_size)
-
-    while True:
-        lines = wrapped_text.split("\n")
-        total_height = sum([draw.textsize(line, font=font)[1] + LINE_SPACING for line in lines])
-        if total_height <= MAX_HEIGHT or font_size <= 20:
+    # wrap + resize text until it fits
+    font_size = 48
+    while font_size >= 20:
+        font = ImageFont.truetype(FONT_PATH, font_size)
+        wrapped = textwrap.fill(confession_text, width=35)
+        lines = wrapped.split("\n")
+        total_h = sum(draw.textsize(line, font=font)[1] + LINE_SPACING for line in lines)
+        if total_h <= MAX_HEIGHT:
             break
         font_size -= 2
-        font = ImageFont.truetype(FONT_PATH, font_size)
 
-    y_start = (template.height - total_height) // 2
+    y = (template.height - total_h) // 2
     for line in lines:
         w, h = draw.textsize(line, font=font)
         x = (template.width - w) // 2
-        draw.text((x, y_start), line, font=font, fill=(255, 255, 255))
-        y_start += h + LINE_SPACING
+        draw.text((x, y), line, font=font, fill=(255, 255, 255))
+        y += h + LINE_SPACING
 
-    template.save(output_path)
+    template.save(output_path, format="JPEG", quality=90)
     return output_path
 
-# --------------------------
-# Post new confessions
-# --------------------------
+
 def post_new_confessions():
-    if db is None:
-        print("Firestore not initialized, skipping confessions.")
+    print("🔍 Fetching unposted confessions...")
+    # timeout safeguard
+    confessions_ref = db.collection("newconfessions").where("posted", "==", False).limit(3)
+
+    docs = list(confessions_ref.stream())
+    if not docs:
+        print("ℹ️ No new confessions found.")
         return
 
-    confessions_ref = db.collection("newconfessions")
-    query = confessions_ref.where("posted", "==", False).stream()
-
-    for doc in query:
+    for doc in docs:
         data = doc.to_dict()
-        text = data.get("text", "")
-        if not text.strip():
+        text = data.get("text", "").strip()
+        if not text:
             continue
 
         try:
             card_path = generate_card(text)
             caption = "Anonymous confession 💌"
+            media = cl.photo_upload(card_path, caption=caption)
+            print(f"✅ Posted confession: {text[:50]}...")
 
-            if cl:
-                cl.photo_upload(card_path, caption=caption)
-                print(f"Posted confession: {text[:50]}...")
-            else:
-                print(f"Skipped posting to Instagram (CI blocked): {text[:50]}...")
-
-            doc.reference.update({"posted": True})
-            print("Marked as posted in Firebase.")
-
+            doc.reference.update({
+                "posted": True,
+                "instagram_media_id": str(media.dict().get("pk"))
+            })
+            print("✔ Firestore updated")
         except Exception as e:
-            print(f"Error posting confession {doc.id}: {e}")
+            print(f"❌ Error posting confession {doc.id}: {e}")
 
-# --------------------------
-# Run the bot
-# --------------------------
+
 if __name__ == "__main__":
     post_new_confessions()
-    print("All new confessions processed!")
+    print("🎉 Done")
