@@ -30,22 +30,23 @@ warnings.filterwarnings(
 SESSION_FILE = "ig_session.json"
 cl = Client()
 
-# Load session: priority -> GitHub secret -> local file -> fresh login
-if IG_SESSION_SECRET:
-    print("Loading session from GitHub Secret...")
-    cl.set_settings(json.loads(IG_SESSION_SECRET))
-    cl.login(IG_USERNAME, IG_PASSWORD)
-    cl.dump_settings(SESSION_FILE)
-elif os.path.exists(SESSION_FILE):
-    print("Loading session from local file...")
-    cl.load_settings(SESSION_FILE)
-    cl.login(IG_USERNAME, IG_PASSWORD)
-else:
-    print("Fresh login...")
-    cl.login(IG_USERNAME, IG_PASSWORD)
-    cl.dump_settings(SESSION_FILE)
+def setup_ig_session():
+    if IG_SESSION_SECRET:
+        print("Loading session from GitHub Secret...")
+        cl.set_settings(json.loads(IG_SESSION_SECRET))
+        cl.login(IG_USERNAME, IG_PASSWORD)
+        cl.dump_settings(SESSION_FILE)
+    elif os.path.exists(SESSION_FILE):
+        print("Loading session from local file...")
+        cl.load_settings(SESSION_FILE)
+        cl.login(IG_USERNAME, IG_PASSWORD)
+    else:
+        print("Fresh login...")
+        cl.login(IG_USERNAME, IG_PASSWORD)
+        cl.dump_settings(SESSION_FILE)
+    print(f"Logged in as: {cl.username}")
 
-print(f"Logged in as: {cl.username}")
+setup_ig_session()
 
 # --------------------------
 # Firebase setup
@@ -54,9 +55,15 @@ if not FIREBASE_JSON:
     raise RuntimeError("FIREBASE_JSON missing!")
 
 cred_dict = json.loads(FIREBASE_JSON)
+
+# 🔥 FIX: Replace literal \n with real newlines for PEM key
+if 'private_key' in cred_dict:
+    cred_dict['private_key'] = cred_dict['private_key'].replace("\\n", "\n")
+
 cred = credentials.Certificate(cred_dict)
 if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
+
 db = firestore.client()
 print("✅ Connected to Firebase Firestore!")
 
