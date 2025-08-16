@@ -20,11 +20,11 @@ cl = Client()
 
 if os.path.exists(SESSION_FILE):
     cl.load_settings(SESSION_FILE)
-    cl.login(IG_USERNAME, IG_PASSWORD)  # ensures session is valid
+    cl.login(IG_USERNAME, IG_PASSWORD)
     print("Logged in using saved session!")
 else:
     cl.login(IG_USERNAME, IG_PASSWORD)
-    cl.dump_settings(SESSION_FILE)  # save session for next time
+    cl.dump_settings(SESSION_FILE)
     print("Logged in and saved session!")
 
 # --------------------------
@@ -41,7 +41,7 @@ print("Connected to Firebase Firestore!")
 # Template settings
 # --------------------------
 TEMPLATE_PATH = "template.png"
-FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Linux default
+FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 MAX_WIDTH = 900
 MAX_HEIGHT = 900
 FONT_SIZE = 48
@@ -67,7 +67,6 @@ def generate_card(confession_text, output_path="confession_card.png"):
         font = ImageFont.truetype(FONT_PATH, font_size)
 
     y_start = (template.height - total_height) // 2
-
     for line in lines:
         w, h = draw.textsize(line, font=font)
         x = (template.width - w) // 2
