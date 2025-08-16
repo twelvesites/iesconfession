@@ -18,30 +18,41 @@ SESSION_FILE = "auto-Instagram-posting-bot/ig_session.json"
 # --------------------------
 cl = Client()
 
-if os.path.exists(SESSION_FILE):
-    cl.load_settings(SESSION_FILE)
-    cl.login(IG_USERNAME, IG_PASSWORD)
-    print("Logged in using saved session!")
-else:
-    cl.login(IG_USERNAME, IG_PASSWORD)
-    cl.dump_settings(SESSION_FILE)
-    print("Logged in and saved session!")
+try:
+    if os.path.exists(SESSION_FILE):
+        cl.load_settings(SESSION_FILE)
+        try:
+            cl.login(IG_USERNAME, IG_PASSWORD)
+            print("Logged in using saved session!")
+        except Exception as e:
+            print("Warning: Could not login with session. Skipping Instagram posts.", e)
+    else:
+        cl.login(IG_USERNAME, IG_PASSWORD)
+        cl.dump_settings(SESSION_FILE)
+        print("Logged in and saved session!")
+except Exception as e:
+    print("Instagram login skipped due to CI restrictions:", e)
+    cl = None  # Mark Instagram client as unavailable
 
 # --------------------------
-# Firebase setup from GitHub secret (raw JSON)
+# Firebase setup from GitHub secret
 # --------------------------
-firebase_json_str = os.environ.get("FIREBASE_JSON")
-cred_dict = json.loads(firebase_json_str)  # parse raw JSON directly
-cred = credentials.Certificate(cred_dict)
-firebase_admin.initialize_app(cred)
-db = firestore.client()
-print("Connected to Firebase Firestore!")
+try:
+    firebase_json_str = os.environ.get("FIREBASE_JSON")
+    cred_dict = json.loads(firebase_json_str)
+    cred = credentials.Certificate(cred_dict)
+    firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    print("Connected to Firebase Firestore!")
+except Exception as e:
+    print("Firebase initialization failed:", e)
+    db = None
 
 # --------------------------
 # Template settings
 # --------------------------
 TEMPLATE_PATH = "template.png"
-FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Linux default
+FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 MAX_WIDTH = 900
 MAX_HEIGHT = 900
 FONT_SIZE = 48
@@ -80,6 +91,10 @@ def generate_card(confession_text, output_path="confession_card.png"):
 # Post new confessions
 # --------------------------
 def post_new_confessions():
+    if db is None:
+        print("Firestore not initialized, skipping confessions.")
+        return
+
     confessions_ref = db.collection("newconfessions")
     query = confessions_ref.where("posted", "==", False).stream()
 
@@ -92,10 +107,16 @@ def post_new_confessions():
         try:
             card_path = generate_card(text)
             caption = "Anonymous confession 💌"
-            cl.photo_upload(card_path, caption=caption)
-            print(f"Posted confession: {text[:50]}...")
+
+            if cl:
+                cl.photo_upload(card_path, caption=caption)
+                print(f"Posted confession: {text[:50]}...")
+            else:
+                print(f"Skipped posting to Instagram (CI blocked): {text[:50]}...")
+
             doc.reference.update({"posted": True})
             print("Marked as posted in Firebase.")
+
         except Exception as e:
             print(f"Error posting confession {doc.id}: {e}")
 
