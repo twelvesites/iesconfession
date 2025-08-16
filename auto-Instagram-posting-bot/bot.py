@@ -31,7 +31,11 @@ else:
 # Firebase setup from GitHub secret
 # --------------------------
 firebase_json_str = os.environ.get("FIREBASE_JSON")
+
+# Clean up extra quotes/line breaks in secret
+firebase_json_str = firebase_json_str.strip().replace("\n", "").replace("\\n", "\n")
 cred_dict = json.loads(firebase_json_str)
+
 cred = credentials.Certificate(cred_dict)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
