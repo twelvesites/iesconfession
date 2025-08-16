@@ -12,22 +12,27 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install system dependencies for Pillow
+      # Install system dependencies for Pillow
+      - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libtiff5-dev tk-dev tcl-dev
+          sudo apt-get install -y libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libtiff5-dev tk-dev tcl-dev python3-dev
 
+      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.12
 
+      # Install Python dependencies
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r auto-Instagram-posting-bot/requirements.txt
+          python -m pip install instagrapi pyotp  # ensure instagrapi is installed
 
-      - name: Run bot
+      # Run the bot
+      - name: Run Instagram bot
         run: python3 auto-Instagram-posting-bot/bot.py
         env:
           FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
