@@ -1,0 +1,4 @@
+selenium==3.141.0
+Pillow==7.1.2
+PySimpleGUI==5.0.8.3
+PyAutoIt==0.6.0

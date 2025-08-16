@@ -1,0 +1,140 @@
+@media only screen and (max-width: 700px) {
+    .nav-links a {
+        font-size: 0.875rem;
+    }
+    .nav-links {
+        gap: 10px;
+    }
+    .navbar img {
+        margin-top: 6px;
+        width: 100px;
+    }
+     .navbar {
+        padding: 10px 16px;
+    }
+    #modal {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffffe0;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 1em 2em;
+    border-radius: 30px;
+    font-size: 13px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 90%;
+}
+#head {
+    margin-top: 80px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: stretch;
+}
+.reply-actions {
+    flex-direction: column;
+    justify-content: space-around;
+}
+.reply-box p {
+    margin: 20px;
+    font-size: 0.875rem;
+    
+}
+.confession-text {
+    font-size: 0.875rem;
+}
+.confession-box {
+      font-size: 0.875rem;
+    }
+    #sendBtn {
+    font-size: 0.875rem;
+}
+#confessionInput {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border-radius: 15px;
+    font-size: 0.875rem;
+    outline-offset: 2px;
+    transition: border-color 0.3s ease;
+    resize: none;
+    height: 45px;
+}
+.hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      margin-top: 10%;
+      color: #f4f4f4;
+    }
+    p {
+        font-size: 0.875rem;
+    }
+    .hero p {
+    font-size: 0.875rem;
+}
+.section h2 {
+    font-size: 2rem;
+}
+.section p {
+    font-size: 0.875rem;
+    margin: 10px;
+    
+}
+.section {
+    padding: 120px 20px;
+}
+.conduct li {
+    margin-bottom: 20px;
+    font-size: 0.875rem;
+    color: #ccc;
+}
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 320px) {
+    .section {
+        padding: 120px 10px;
+    }
+        .section h2 {
+        font-size: 1.8rem;
+    }
+    .nav-links a {
+        font-size: 0.675rem;
+    }
+        .navbar img {
+        margin-top: 0px;
+        width: 80px;
+    }
+    #head-text {
+    font-size: 55px;
+}
+.descript {
+    font-size: 13px;
+}
+    #confessionInput {
+        padding: 0.8rem 0.300rem;
+    }
+    #inputBar {
+    padding: 1rem 0.5rem;
+}
+#content {
+    margin: 0 5px;
+}
+
+#chatInputWrapper {
+    padding: 1rem 0.5rem;
+}
+.back-btn {
+        margin: 0px 5px 10px;
+        width: fit-content;
+    }
+}
