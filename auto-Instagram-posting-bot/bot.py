@@ -5,7 +5,6 @@ from instagrapi import Client
 from PIL import Image, ImageDraw, ImageFont
 import firebase_admin
 from firebase_admin import credentials, firestore
-import base64
 
 # --------------------------
 # Instagram credentials from GitHub Actions secrets
@@ -29,12 +28,10 @@ else:
     print("Logged in and saved session!")
 
 # --------------------------
-# Firebase setup from GitHub secret (base64 encoded)
+# Firebase setup from GitHub secret (raw JSON)
 # --------------------------
-firebase_json_b64 = os.environ.get("FIREBASE_JSON")
-firebase_json_bytes = base64.b64decode(firebase_json_b64)
-cred_dict = json.loads(firebase_json_bytes)
-
+firebase_json_str = os.environ.get("FIREBASE_JSON")
+cred_dict = json.loads(firebase_json_str)  # parse raw JSON directly
 cred = credentials.Certificate(cred_dict)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
@@ -44,7 +41,7 @@ print("Connected to Firebase Firestore!")
 # Template settings
 # --------------------------
 TEMPLATE_PATH = "template.png"
-FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # Linux default
 MAX_WIDTH = 900
 MAX_HEIGHT = 900
 FONT_SIZE = 48
