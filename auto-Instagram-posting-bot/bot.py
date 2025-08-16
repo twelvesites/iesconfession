@@ -70,7 +70,7 @@ print("✅ Connected to Firebase Firestore!")
 # --------------------------
 # Template settings
 # --------------------------
-TEMPLATE_PATH = "template.png"
+TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), "template.png")
 FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 LINE_SPACING = 10
 MAX_HEIGHT = 900
