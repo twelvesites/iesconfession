@@ -1,4 +1,4 @@
- // Firebase init
+// Firebase init
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getFirestore, doc, getDoc, updateDoc, onSnapshot
@@ -29,27 +29,24 @@ function showModal(msg, duration = 5500) {
 // Sound
 const sendSound = new Audio('send.mp3');
 
-// Cookie helpers
-function setCookie(name, value, days = 30) {
-  const expires = new Date(Date.now() + days * 864e5).toUTCString();
-  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+// LocalStorage helpers
+function setLocal(name, value) {
+  localStorage.setItem(name, JSON.stringify(value));
 }
-function getCookie(name) {
-  return document.cookie.split('; ').reduce((r, v) => {
-    const parts = v.split('=');
-    return parts[0] === name ? decodeURIComponent(parts[1]) : r;
-  }, '');
+function getLocal(name) {
+  const val = localStorage.getItem(name);
+  return val ? JSON.parse(val) : null;
 }
 function getOrCreateUserId() {
-  let userId = getCookie('userId');
+  let userId = getLocal('userId');
   if (!userId) {
     userId = crypto.randomUUID();
-    setCookie('userId', userId, 365);
+    setLocal('userId', userId);
   }
   return userId;
 }
 const currentUserId = getOrCreateUserId();
-let likedReplies = JSON.parse(getCookie('likedReplies') || '[]');
+let likedReplies = getLocal('likedReplies') || [];
 
 // Moderation API
 const MODERATION_API_URL = "https://twelve-ai.vercel.app/api/moderate";
@@ -122,7 +119,7 @@ async function loadPost() {
   postBox.style.display = 'none';
   repliesBox.style.display = 'none';
 
-  const docRef = doc(db, "confessions", postId);
+  const docRef = doc(db, "newconfessions", postId);
   const docSnap = await getDoc(docRef);
 
   document.getElementById('loading').style.display = 'none';
@@ -147,9 +144,8 @@ async function loadPost() {
   renderReplies(currentReplies);
 }
 
-
 window.likeReply = async function(id) {
-  const docRef = doc(db, "confessions", postId);
+  const docRef = doc(db, "newconfessions", postId);
   const idx = currentReplies.findIndex(r => r.id === id);
   if (idx === -1) return;
   const reply = { ...currentReplies[idx] };
@@ -165,7 +161,7 @@ window.likeReply = async function(id) {
   currentReplies[idx] = { ...reply, likes: newLikes };
   try {
     await updateDoc(docRef, { replies: currentReplies });
-    setCookie('likedReplies', JSON.stringify(likedReplies));
+    setLocal('likedReplies', likedReplies);
     renderReplies(currentReplies);
   } catch (err) {
     console.error("❌ Failed to like:", err);
@@ -175,7 +171,7 @@ window.likeReply = async function(id) {
 
 window.replyDelete = async function(id) {
   if (!confirm("Delete your reply? This action cannot be undone.")) return;
-  const docRef = doc(db, "confessions", postId);
+  const docRef = doc(db, "newconfessions", postId);
   const idx = currentReplies.findIndex(r => r.id === id);
   const reply = currentReplies[idx];
   if (!reply) return;
@@ -185,9 +181,9 @@ window.replyDelete = async function(id) {
   }
   currentReplies = currentReplies.filter(r => r.id !== id);
   await updateDoc(docRef, { replies: currentReplies });
-  let userReplies = JSON.parse(getCookie('userReplies') || '[]');
+  let userReplies = getLocal('userReplies') || [];
   userReplies = userReplies.filter(x => x !== id);
-  setCookie('userReplies', JSON.stringify(userReplies));
+  setLocal('userReplies', userReplies);
 };
 
 function disableSendButtonCooldown(duration = 60) {
@@ -241,7 +237,7 @@ sendBtn.addEventListener('click', async () => {
     return;
   }
   try {
-    const docRef = doc(db, "confessions", postId);
+    const docRef = doc(db, "newconfessions", postId);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
       showModal("Error: Confession not found.");
@@ -291,7 +287,7 @@ replyInput.addEventListener('keydown', (e) => {
   }
 });
 
-onSnapshot(doc(db, "confessions", postId), (docSnap) => {
+onSnapshot(doc(db, "newconfessions", postId), (docSnap) => {
   if (docSnap.exists()) {
     currentReplies = docSnap.data().replies || [];
     renderReplies(currentReplies);
@@ -299,4 +295,3 @@ onSnapshot(doc(db, "confessions", postId), (docSnap) => {
 });
 
 loadPost();
-
