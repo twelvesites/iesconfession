@@ -152,14 +152,18 @@ window.goToReply = function(id) {
   window.location.href = `reply.html?id=${id}`;
 };
 
-/* ---------------- RENDER ---------------- */
 function renderConfession(docId, data) {
   const isMine = data.userId === currentUserId;
   const liked = lsHas('likedPosts', docId);
 
   const card = document.createElement('div');
   card.className = 'confession-box';
-  card.style.position = 'relative'; // necessary for absolute child positioning
+  card.style.position = 'relative'; // for absolute child positioning
+
+  // When clicking anywhere on the card (except buttons), go to reply page
+  card.onclick = () => {
+    window.location.href = `reply.html?id=${docId}`;
+  };
 
   card.innerHTML = `
     <div class="confession-text">${censorNamesWithHighlight(data.text)}</div>
