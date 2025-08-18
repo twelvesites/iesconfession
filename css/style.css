@@ -281,6 +281,16 @@ margin-top: 40px;
   width: fit-content;
 }
 
+.click-to-reply {
+  position: absolute;
+  bottom: 5px;       /* above the like/delete/report buttons */
+  left: 50%;          /* horizontally center */
+  transform: translateX(-50%);
+  font-size: 0.5em;
+  color: gray;
+  text-align: center;
+  pointer-events: none; /* so clicks go to the card/buttons */
+}
 
     .reply-actions {
       margin-top: 6px;

@@ -35,7 +35,14 @@ function setLocal(name, value) {
 }
 function getLocal(name) {
   const val = localStorage.getItem(name);
-  return val ? JSON.parse(val) : null;
+  if (!val) return null;
+  try {
+    return JSON.parse(val);
+  } catch (e) {
+    console.warn(`⚠️ Corrupted localStorage for ${name}, resetting.`, e);
+    localStorage.removeItem(name);
+    return null;
+  }
 }
 function getOrCreateUserId() {
   let userId = getLocal('userId');

@@ -156,20 +156,30 @@ window.goToReply = function(id) {
 function renderConfession(docId, data) {
   const isMine = data.userId === currentUserId;
   const liked = lsHas('likedPosts', docId);
+
   const card = document.createElement('div');
   card.className = 'confession-box';
-  card.onclick = () => goToReply(docId);
+  card.style.position = 'relative'; // necessary for absolute child positioning
+
   card.innerHTML = `
     <div class="confession-text">${censorNamesWithHighlight(data.text)}</div>
+    
+    <div class="click-to-reply">Click to reply</div>
+    
     <div class="like-reply-bar">
-      <button onclick="event.stopPropagation(); likePost('${docId}')">${liked ? '❤️' : '🤍'} ${data.likes || 0}</button>
+      <button onclick="event.stopPropagation(); likePost('${docId}')">
+        ${liked ? '❤️' : '🤍'} ${data.likes || 0}
+      </button>
       ${isMine 
         ? `<button onclick="event.stopPropagation(); deletePost('${docId}')">🗑️ Delete</button>` 
         : `<button onclick="event.stopPropagation(); reportPost('${docId}')">🚩 Report</button>`}
     </div>
   `;
+
   feed.appendChild(card);
 }
+
+
 
 const q = query(collection(db, 'newconfessions'), orderBy('createdAt', 'desc'));
 onSnapshot(q, snapshot => {
