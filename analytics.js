@@ -10,7 +10,7 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// 1. Firebase Config
+// --- Firebase Config ---
 const firebaseConfig = {
   apiKey: "AIzaSyDob9nbpu0Y9ebCmxwHBTCyFFCzSjgNFLs",
   authDomain: "confession-ies.firebaseapp.com",
@@ -20,17 +20,35 @@ const firebaseConfig = {
   appId: "1:705171117795:web:4aa165b3b071a0d6b197d6",
   measurementId: "G-9347YMJ01Z"
 };
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 2. Get or Set visitorId
-let visitorId = localStorage.getItem("visitorId");
-if (!visitorId) {
-  visitorId = crypto.randomUUID(); // Unique ID
-  localStorage.setItem("visitorId", visitorId);
+// --- Visitor ID ---
+async function getOrCreateVisitorId() {
+  let visitorId = localStorage.getItem("visitorId");
+  if (!visitorId) {
+    visitorId = crypto.randomUUID();
+    localStorage.setItem("visitorId", visitorId);
+  }
+
+  const visitorRef = doc(db, "visitors", visitorId);
+  const docSnap = await getDoc(visitorRef);
+
+  // If Firebase doc is missing, create it
+  if (!docSnap.exists()) {
+    await setDoc(visitorRef, {
+      firstVisitAt: serverTimestamp(),
+      lastVisitAt: serverTimestamp(),
+      visitCount: 1,
+      deviceInfo: getDeviceInfo()
+    });
+  }
+
+  return visitorId;
 }
 
-// 3. Get device info
+// --- Device Info ---
 function getDeviceInfo() {
   const ua = navigator.userAgent;
   return {
@@ -43,35 +61,29 @@ function getDeviceInfo() {
   };
 }
 
-// 4. Log or update visitor info
+// --- Log Visit ---
 async function logVisit() {
+  const visitorId = await getOrCreateVisitorId();
   const visitorRef = doc(db, "visitors", visitorId);
   const docSnap = await getDoc(visitorRef);
   const deviceInfo = getDeviceInfo();
 
-  if (!docSnap.exists()) {
-    // New visitor
-    await setDoc(visitorRef, {
-      firstVisitAt: serverTimestamp(),
-      lastVisitAt: serverTimestamp(),
-      visitCount: 1,
-      deviceInfo
-    });
-  } else {
-    // Returning visitor
+  if (docSnap.exists()) {
+    // Update last visit & increment count
     await updateDoc(visitorRef, {
       lastVisitAt: serverTimestamp(),
-      visitCount: (docSnap.data().visitCount || 1) + 1
+      visitCount: (docSnap.data().visitCount || 1) + 1,
+      deviceInfo
     });
   }
 
-  // Add session
+  // Add a new session for this page visit
   await addDoc(collection(visitorRef, "sessions"), {
-    sessionStartAt: serverTimestamp(),
-    pagesVisited: [window.location.pathname],
-    duration: null // Add later if needed
+    visitedAt: serverTimestamp(),
+    page: window.location.pathname,
+    duration: null // Optional: you can calculate later
   });
 }
 
-// 5. Call it
+// --- Run it ---
 logVisit();
