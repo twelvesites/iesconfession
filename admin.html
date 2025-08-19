@@ -2,253 +2,225 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Panel - Confessions</title>
+  <title>Admin Panel - IES Confessions</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      padding: 20px;
-    }
-
-    h1, h2 {
-      text-align: center;
-    }
-
-    .confession-box, .visitor-box {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 15px;
-      margin-bottom: 20px;
-      border-left: 6px solid red;
-    }
-
-    .confession-text {
-      font-size: 16px;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-
-    .meta {
-      font-size: 14px;
-      color: #333;
-      margin-top: 5px;
-    }
-
-    .meta strong {
-      color: #e11d48;
-    }
-
-    .meta-section {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid #ddd;
-    }
-
-    .meta button {
-      background: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .meta button:hover {
-      background: darkred;
-    }
-
-    .sessions-container {
-      margin-top: 10px;
-      padding: 10px;
-      background: #f1f1f1;
-      border-radius: 5px;
-    }
-
-    #visitorStats {
-      background: #fff3cd;
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 30px;
-      text-align: center;
-    }
+    body { font-family: Arial, sans-serif; background: #f8f9fa; padding: 20px; margin:0; }
+    h1, h2 { text-align: center; margin: 10px 0; }
+    .stats-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
+    .stat-box { background: #fff3cd; padding: 20px; border-radius: 10px; text-align: center; min-width: 150px; font-size: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .stat-box strong { font-size: 18px; color: #e11d48; display:block; margin-bottom:5px; }
+    .confession-box, .visitor-box { background: white; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 20px; border-left: 6px solid red; }
+    .confession-text { font-size: 16px; margin-bottom: 10px; font-weight: bold; }
+    .meta { font-size: 14px; color: #333; margin-top: 5px; }
+    .meta strong { color: #e11d48; }
+    .meta-section { margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd; }
+    .meta button { background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+    .meta button:hover { background: darkred; }
+    .sessions-container { margin-top: 10px; padding: 10px; background: #f1f1f1; border-radius: 5px; }
+    pre { font-size:13px; background:#f1f1f1; padding:8px; border-radius:5px; overflow-x:auto; }
   </style>
 </head>
 <body>
 
-  <h1>🚨 Admin Confession Dashboard</h1>
-  <div id="adminFeed"></div>
+<h1>🚨 Admin Dashboard - TWELVE</h1>
 
-  <h2>👥 Visitor Analytics</h2>
-  <div id="visitorStats">
-    <p>Total Visitors: <span id="totalVisitors">0</span></p>
-    <p>Average Visitors per Day: <span id="avgVisitors">0</span></p>
-    <p>Most Recent Visitor: <span id="recentVisitor">N/A</span></p>
+<!-- Stats Row -->
+<div class="stats-container">
+  <div class="stat-box">
+    <strong id="totalConfessions">0</strong>
+    Total Confessions
   </div>
-  <div id="adminVisitors"></div>
+  <div class="stat-box">
+    <strong id="totalFeedbacks">0</strong>
+    Total Feedbacks
+  </div>
+  <div class="stat-box">
+    <strong id="totalVisitors">0</strong>
+    Total Visitors
+  </div>
+  <div class="stat-box">
+    <strong id="avgVisitors">0</strong>
+    Avg Visitors/Day
+  </div>
+  <div class="stat-box">
+    <strong id="recentVisitor">N/A</strong>
+    Most Recent Visitor
+  </div>
+</div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import {
-      getFirestore, collection, query, orderBy, onSnapshot,
-      deleteDoc, doc, getDocs
-    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+<!-- Confession Feed -->
+<h2>📢 Confessions</h2>
+<div id="adminFeed"></div>
 
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyDob9nbpu0Y9ebCmxwHBTCyFFCzSjgNFLs",
-      authDomain: "confession-ies.firebaseapp.com",
-      projectId: "confession-ies",
-      storageBucket: "confession-ies.firebasestorage.app",
-      messagingSenderId: "705171117795",
-      appId: "1:705171117795:web:4aa165b3b071a0d6b197d6",
-      measurementId: "G-9347YMJ01Z"
-    };
+<!-- Visitor Analytics -->
+<h2>👥 Visitor Analytics</h2>
+<div id="adminVisitors"></div>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, query, orderBy, onSnapshot, doc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import UAParser from "https://esm.sh/ua-parser-js@1.0.2";
 
-    const adminFeed = document.getElementById('adminFeed');
-    const adminVisitorsContainer = document.getElementById('adminVisitors');
+// --- Firebase Config ---
+const firebaseConfig = {
+  apiKey: "AIzaSyDob9nbpu0Y9ebCmxwHBTCyFFCzSjgNFLs",
+  authDomain: "confession-ies.firebaseapp.com",
+  projectId: "confession-ies",
+  storageBucket: "confession-ies.appspot.com",
+  messagingSenderId: "705171117795",
+  appId: "1:705171117795:web:4aa165b3b071a0d6b197d6",
+  measurementId: "G-9347YMJ01Z"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    function escapeHTML(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
+// --- DOM Elements ---
+const totalConfessionsEl = document.getElementById('totalConfessions');
+const totalFeedbackEl = document.getElementById('totalFeedbacks');
+const totalVisitorsEl = document.getElementById('totalVisitors');
+const avgVisitorsEl = document.getElementById('avgVisitors');
+const recentVisitorEl = document.getElementById('recentVisitor');
+const adminFeed = document.getElementById('adminFeed');
+const adminVisitorsContainer = document.getElementById('adminVisitors');
+
+// --- Helpers ---
+function escapeHTML(text) {
+  const div = document.createElement('div'); 
+  div.textContent = text; 
+  return div.innerHTML;
+}
+
+function formatTimestamp(ts) {
+  if (!ts) return "Unknown";
+  if (ts.toDate) return ts.toDate().toLocaleString();
+  return new Date(ts).toLocaleString();
+}
+
+// --- Persistent Visitor ID ---
+let visitorId = localStorage.getItem('visitorId');
+if (!visitorId) {
+  visitorId = crypto.randomUUID();
+  localStorage.setItem('visitorId', visitorId);
+}
+
+// --- Render Confession ---
+function renderAdminCard(docId, data) {
+  const { text, createdAt, userId, reports, language, platform, userAgent, likes, replies, deviceInfo = {} } = data;
+  const date = formatTimestamp(createdAt);
+  const box = document.createElement('div');
+  box.className = 'confession-box';
+  box.innerHTML = `
+    <div class="confession-text">${escapeHTML(text || "[No Text]")}</div>
+    <div class="meta"><strong>📅 Submitted:</strong> ${date}</div>
+    <div class="meta"><strong>🧑 User ID:</strong> ${userId || "N/A"}</div>
+    <div class="meta"><strong>⚠️ Reports:</strong> ${reports || 0}</div>
+    <div class="meta"><strong>❤️ Likes:</strong> ${likes || 0}</div>
+    <div class="meta"><strong>💬 Replies:</strong> ${replies?.length || 0}</div>
+    <div class="meta"><strong>🌐 Language:</strong> ${language || "N/A"}</div>
+    <div class="meta"><strong>💻 Platform:</strong> ${platform || "N/A"}</div>
+    <div class="meta"><strong>🕵️ User Agent:</strong> ${userAgent || "N/A"}</div>
+    <div class="meta"><strong>📱 Device Info:</strong><pre>${escapeHTML(JSON.stringify(deviceInfo, null, 2))}</pre></div>
+    <div class="meta"><button onclick="deleteConfession('${docId}')">🗑️ Delete Confession</button></div>
+  `;
+  adminFeed.appendChild(box);
+}
+
+// --- Delete Confession ---
+window.deleteConfession = async function(id){
+  if(!confirm("Delete this confession?")) return;
+  await deleteDoc(doc(db,'newconfessions',id));
+};
+
+// --- Load Confessions ---
+function loadConfessions(){
+  const q = query(collection(db,'newconfessions'),orderBy('createdAt','desc'));
+  onSnapshot(q,snap=>{
+    adminFeed.innerHTML='';
+    snap.forEach(d=>renderAdminCard(d.id,d.data()));
+    totalConfessionsEl.textContent=snap.size;
+  });
+}
+
+// --- Load Feedbacks ---
+async function loadFeedbacks(){
+  const snap = await getDocs(collection(db,'feedbacks'));
+  totalFeedbackEl.textContent = snap.size;
+}
+
+// --- Render Visitors ---
+async function renderVisitors(){
+  const snap = await getDocs(collection(db,"visitors"));
+  const visitorsRaw = snap.docs.map(d=>({id:d.id,...d.data()}));
+  adminVisitorsContainer.innerHTML='';
+
+  // Merge visitors by persistent ID
+  const visitorsMap = {};
+  for (const v of visitorsRaw) {
+    const id = v.id === visitorId ? visitorId : v.id;
+    if (!visitorsMap[id]) visitorsMap[id] = v;
+    else {
+      visitorsMap[id].visitCount = (visitorsMap[id].visitCount || 0) + (v.visitCount || 0);
+      visitorsMap[id].firstVisitAt = visitorsMap[id].firstVisitAt < v.firstVisitAt ? visitorsMap[id].firstVisitAt : v.firstVisitAt;
+      visitorsMap[id].lastVisitAt = visitorsMap[id].lastVisitAt > v.lastVisitAt ? visitorsMap[id].lastVisitAt : v.lastVisitAt;
     }
+  }
 
-    function formatTimestamp(ts) {
-      try {
-        if (!ts) return "Unknown";
-        if (typeof ts.toDate === 'function') return ts.toDate().toLocaleString();
-        return new Date(ts).toLocaleString();
-      } catch {
-        return "Invalid Date";
-      }
-    }
+  const visitors = Object.values(visitorsMap);
+  visitors.sort((a,b)=>{
+    const aT = a.lastVisitAt?.toDate ? a.lastVisitAt.toDate().getTime() : 0;
+    const bT = b.lastVisitAt?.toDate ? b.lastVisitAt.toDate().getTime() : 0;
+    return bT-aT;
+  });
 
-    // ——— Confessions Section ———
-    function renderAdminCard(docId, data) {
-      const { text, createdAt, userId, reports, language, platform, userAgent, likes, replies, deviceInfo = {} } = data;
-      const date = formatTimestamp(createdAt);
+  for (const v of visitors) {
+    const sessionsSnap = await getDocs(collection(db,"visitors",v.id,"sessions"));
+    const sessions = sessionsSnap.docs.map(s=>s.data());
+    const ua = new UAParser(v.userAgent||"").getResult();
+    const box = document.createElement('div');
+    box.className='visitor-box';
+    box.innerHTML=`
+      <h3>Visitor ID: ${escapeHTML(v.id)}</h3>
+      <p>First Visit: ${formatTimestamp(v.firstVisitAt)}</p>
+      <p>Last Visit: ${formatTimestamp(v.lastVisitAt)}</p>
+      <p>Total Visits: ${v.visitCount||0}</p>
+      <p>Device: ${ua.device.vendor||'Unknown'} ${ua.device.model||ua.device.type||'Unknown'}</p>
+      <p>OS: ${ua.os.name||'Unknown'} ${ua.os.version||''}</p>
+      <p>Browser: ${ua.browser.name||'Unknown'} ${ua.browser.version||''}</p>
+      <p>Screen: ${v.deviceInfo?.screenResolution||'Unknown'}</p>
+      <p>Language: ${v.deviceInfo?.language||'Unknown'}</p>
+      <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+        Toggle Sessions (${sessions.length})
+      </button>
+      <div class="sessions-container" style="display:none">
+        ${sessions.map(s=>`<div><p>Visited At: ${formatTimestamp(s.visitedAt)}</p><p>Page: ${escapeHTML(s.page)}</p></div>`).join('')}
+      </div>
+    `;
+    adminVisitorsContainer.appendChild(box);
+  }
 
-      const box = document.createElement('div');
-      box.className = 'confession-box';
-      box.innerHTML = `
-        <div class="confession-text">${escapeHTML(text || "[No Text]")}</div>
-        <div class="meta"><strong>📅 Submitted:</strong> ${date}</div>
-        <div class="meta"><strong>🧑 User ID:</strong> ${userId || "N/A"}</div>
-        <div class="meta"><strong>⚠️ Reports:</strong> ${reports || 0}</div>
-        <div class="meta"><strong>❤️ Likes:</strong> ${likes || 0}</div>
-        <div class="meta"><strong>💬 Replies:</strong> ${replies?.length || 0}</div>
-        <div class="meta-section">
-          <div class="meta"><strong>🌐 Language:</strong> ${language || "N/A"}</div>
-          <div class="meta"><strong>💻 Platform:</strong> ${platform || "N/A"}</div>
-          <div class="meta"><strong>🕵️ User Agent:</strong> ${userAgent || "N/A"}</div>
-        </div>
-        <div class="meta-section">
-          <div class="meta"><strong>📱 Device Info:</strong></div>
-          <pre style="font-size: 13px; background: #f1f1f1; padding: 8px; border-radius: 5px; overflow-x: auto;">
-${escapeHTML(JSON.stringify(deviceInfo, null, 2))}
-          </pre>
-        </div>
-        <div class="meta">
-          <button onclick="deleteConfession('${docId}')">🗑️ Delete Confession</button>
-        </div>
-      `;
-      adminFeed.appendChild(box);
-    }
+  // Stats
+  totalVisitorsEl.textContent=visitors.length;
+  if(visitors.length){
+    const first = visitors.reduce((earliest,v)=>{
+      const t=v.firstVisitAt?.toDate?v.firstVisitAt.toDate():new Date();
+      return !earliest||t<earliest?t:earliest;
+    },null);
+    const last = visitors.reduce((latest,v)=>{
+      const t=v.lastVisitAt?.toDate?v.lastVisitAt.toDate():new Date();
+      return !latest||t>latest?t:latest;
+    },null);
+    const days = Math.max((last-first)/(1000*60*60*24),1);
+    avgVisitorsEl.textContent=(visitors.length/days).toFixed(1);
+    recentVisitorEl.textContent=visitors[0]?.id||"N/A";
+  }
+}
 
-    window.deleteConfession = async function(id) {
-      if (confirm("Are you sure you want to delete this confession?")) {
-        try {
-          await deleteDoc(doc(db, 'newconfessions', id));
-          alert("🗑️ Confession deleted.");
-        } catch (err) {
-          alert("❌ Failed: " + err.message);
-        }
-      }
-    };
+// --- Initialize ---
+loadConfessions();
+loadFeedbacks();
+renderVisitors();
 
-    const confessionsQuery = query(collection(db, 'newconfessions'), orderBy('createdAt', 'desc'));
-    onSnapshot(confessionsQuery, snapshot => {
-      adminFeed.innerHTML = '';
-      snapshot.forEach(docSnap => renderAdminCard(docSnap.id, docSnap.data()));
-    });
 
-    // ——— Visitors Section ———
-    async function fetchVisitors() {
-      const snapshot = await getDocs(collection(db, "visitors"));
-      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    }
-
-    async function fetchSessions(visitorId) {
-      const snapshot = await getDocs(collection(db, "visitors", visitorId, "sessions"));
-      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    }
-
-    async function renderVisitors() {
-      const visitors = await fetchVisitors();
-      adminVisitorsContainer.innerHTML = '';
-
-      visitors.forEach(visitor => {
-        const box = document.createElement('div');
-        box.className = 'visitor-box';
-        box.innerHTML = `
-          <h3>Visitor ID: ${escapeHTML(visitor.id)}</h3>
-          <p>First Visit: ${formatTimestamp(visitor.firstVisitAt)}</p>
-          <p>Last Visit: ${formatTimestamp(visitor.lastVisitAt)}</p>
-          <p>Visit Count: ${visitor.visitCount || 0}</p>
-          <p>Device: ${escapeHTML(visitor.deviceInfo?.deviceType || 'Unknown')}</p>
-          <p>Browser: ${escapeHTML(visitor.deviceInfo?.browser || 'Unknown')}</p>
-          <button id="showSessions-${visitor.id}">Show Sessions</button>
-          <div id="sessions-${visitor.id}" class="sessions-container" style="display:none;"></div>
-        `;
-        adminVisitorsContainer.appendChild(box);
-
-        box.querySelector(`#showSessions-${visitor.id}`).addEventListener('click', async () => {
-          const sessionsContainer = box.querySelector(`#sessions-${visitor.id}`);
-          if (sessionsContainer.style.display === 'none') {
-            sessionsContainer.style.display = 'block';
-            const sessions = await fetchSessions(visitor.id);
-            sessionsContainer.innerHTML = sessions.map(s => `
-              <div class="session-item">
-                <p>Started: ${formatTimestamp(s.sessionStartAt)}</p>
-                <p>Pages Visited: ${escapeHTML(s.pagesVisited?.join(', ') || 'N/A')}</p>
-              </div>
-            `).join('');
-          } else {
-            sessionsContainer.style.display = 'none';
-          }
-        });
-      });
-
-      updateVisitorStats(visitors);
-    }
-
-    function updateVisitorStats(visitors) {
-      document.getElementById('totalVisitors').textContent = visitors.length;
-
-      if (visitors.length === 0) {
-        document.getElementById('avgVisitors').textContent = 0;
-        document.getElementById('recentVisitor').textContent = "N/A";
-        return;
-      }
-
-      const timestamps = visitors
-        .map(v => v.firstVisitAt?.toDate ? v.firstVisitAt.toDate() : new Date(v.firstVisitAt))
-        .filter(Boolean)
-        .sort((a,b)=>a-b);
-
-      const days = Math.max((timestamps[timestamps.length-1]-timestamps[0])/(1000*60*60*24), 1);
-      document.getElementById('avgVisitors').textContent = (visitors.length/days).toFixed(1);
-
-      const recent = visitors.reduce((a,b) => (a.firstVisitAt > b.firstVisitAt ? a : b));
-      document.getElementById('recentVisitor').textContent = recent.id;
-    }
-
-    renderVisitors();
-  </script>
+</script>
 </body>
 </html>
