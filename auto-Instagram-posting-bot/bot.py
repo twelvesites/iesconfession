@@ -71,7 +71,7 @@ print("✅ Connected to Firebase Firestore!")
 # Template & font settings
 # --------------------------
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), "template.png")
-FONT_PATH = "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf"  # Change this to your font
+FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # original font
 LINE_SPACING = 10
 MAX_HEIGHT = 900
 
