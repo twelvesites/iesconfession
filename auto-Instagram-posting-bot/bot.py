@@ -56,7 +56,7 @@ if not FIREBASE_JSON:
 
 cred_dict = json.loads(FIREBASE_JSON)
 
-# 🔥 FIX: Replace literal \n with real newlines for PEM key
+# 🔥 Fix PEM key newlines
 if "private_key" in cred_dict:
     cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
 
@@ -68,10 +68,10 @@ db = firestore.client()
 print("✅ Connected to Firebase Firestore!")
 
 # --------------------------
-# Template settings
+# Template & font settings
 # --------------------------
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), "template.png")
-FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_PATH = "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf"  # Change this to your font
 LINE_SPACING = 10
 MAX_HEIGHT = 900
 
@@ -83,8 +83,11 @@ def generate_card(confession_text: str, output_path="confession_card.jpg") -> st
     draw = ImageDraw.Draw(template)
 
     font_size = 48
+    wrapped = None
+    lines = None
     while font_size >= 20:
         font = ImageFont.truetype(FONT_PATH, font_size)
+        # Wrap text nicely; caps or long text handled automatically
         wrapped = textwrap.fill(confession_text, width=35)
         lines = wrapped.split("\n")
         total_h = sum(font.getbbox(line)[3] + LINE_SPACING for line in lines)
@@ -92,6 +95,7 @@ def generate_card(confession_text: str, output_path="confession_card.jpg") -> st
             break
         font_size -= 2
 
+    # Vertical centering
     y = (template.height - total_h) // 2
     for line in lines:
         bbox = font.getbbox(line)
