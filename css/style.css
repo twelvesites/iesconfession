@@ -42,7 +42,7 @@ body {
 #head-text {
     text-align: center;
     font-size: 70px;
-    color: #f85a6c;
+    color: #00dbff;
     margin-top: 90px;
     font-family: "Bangers", system-ui;
 }
@@ -74,7 +74,7 @@ body {
     .confession-box {
       flex: 0 0 200px;
       height: 200px; /* make it square */
-      background: #564033;
+      background: #00778a;
       border-radius: 15px;
       padding: 1rem;
       box-shadow: 0 6px 10px rgba(99, 102, 241, 0.15);
@@ -159,7 +159,7 @@ textarea {
       border-color: #ff4c60;
     }
     #sendBtn {
-      background: #ff4c60;
+      background: #00778a;
       border: none;
       color: white;
       padding: 0 1.5rem;
@@ -286,8 +286,8 @@ margin-top: 40px;
   bottom: 5px;       /* above the like/delete/report buttons */
   left: 50%;          /* horizontally center */
   transform: translateX(-50%);
-  font-size: 0.5em;
-  color: gray;
+  font-size: 0.8em;
+  color: rgb(186, 244, 255);
   text-align: center;
   pointer-events: none; /* so clicks go to the card/buttons */
 }
@@ -368,11 +368,11 @@ margin-top: 40px;
 }
 
 #replyInput:focus {
-  border-color: #ff4c60;
+  border-color: #00778a;
 }
 
 #sendReply {
-  background: #ff4c60;
+  background: #00778a;
   color: white;
   border: none;
   border-radius: 30px;
@@ -417,7 +417,7 @@ margin-top: 40px;
 }
 
 .hero {
-      background: #121212;
+      background: #000000;
       flex-direction: row;
       justify-content: space-between;
       padding: 100px;
@@ -461,7 +461,7 @@ margin-top: 40px;
     }
 
     .conduct {
-      background: #1c1c1c;
+      background: #000000;
     }
 
     .accept-btn {
@@ -470,7 +470,7 @@ margin-top: 40px;
       padding: 14px 40px;
       font-size: 1rem;
       color: white;
-      background-color: #ff4c60;
+      background-color: #00a7c0;
       border: none;
       border-radius: 30px;
       cursor: pointer;
@@ -479,10 +479,9 @@ margin-top: 40px;
     }
 
     .accept-btn:hover {
-      background-color: #ff1a35;
+      background-color: #00778a;
     }
     .conduct {
-      background: #1c1c1c;
       text-align: left;
     }
 

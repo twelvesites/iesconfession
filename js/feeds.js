@@ -158,17 +158,19 @@ function renderConfession(docId, data) {
 
   const card = document.createElement('div');
   card.className = 'confession-box';
-  card.style.position = 'relative'; // for absolute child positioning
+  card.style.position = 'relative';
 
   // When clicking anywhere on the card (except buttons), go to reply page
   card.onclick = () => {
     window.location.href = `reply.html?id=${docId}`;
   };
 
+  const replyCount = data.replies ? data.replies.length : 0;
+
   card.innerHTML = `
     <div class="confession-text">${censorNamesWithHighlight(data.text)}</div>
     
-    <div class="click-to-reply">Click to reply</div>
+    <div class="click-to-reply">${replyCount} ${replyCount === 1 ? 'reply' : 'replies'}</div>
     
     <div class="like-reply-bar">
       <button onclick="event.stopPropagation(); likePost('${docId}')">
@@ -182,6 +184,7 @@ function renderConfession(docId, data) {
 
   feed.appendChild(card);
 }
+
 
 
 
@@ -241,7 +244,7 @@ async function attemptToSendConfession() {
     const isBlocked = await moderateText(text);
 
     if (isBlocked) {
-      showModal("🛑 This message isn't safe to post. Please keep it kind, anonymous and respectful.");
+      showModal("🛑 Confessions cannot be harassing or spreading of someone's secrets. Please respect the rules. DM us if this is a wrong message.");
       sendBtn.disabled = false;
       return;
     }
@@ -266,7 +269,7 @@ async function attemptToSendConfession() {
     input.value = '';
     sendSound.play();
     disableSendButtonCooldown(60);
-    showModal("✅ Posted!");
+    showModal("✅ Posted! Your confession will appear in iestea.app under 10 mins.");
 
   } catch (e) {
     console.error("Error:", e);
