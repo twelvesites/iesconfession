@@ -21,12 +21,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-
-const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6LcItMgrAAAAANWhC3KA1C1AG6yFFB-GovQtCLi1'), 
-  isTokenAutoRefreshEnabled: true
-});
-
 // ---------------- DOM ELEMENTS ----------------
 const feed = document.getElementById('confessionFeed');
 const input = document.getElementById('confessionInput');
