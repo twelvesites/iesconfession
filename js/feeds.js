@@ -21,8 +21,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // ---------------- APP CHECK ----------------
+// ⚡ Set your actual debug token string here
+
+
 const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6LcItMgrAAAAANWhC3KA1C1AG6yFFB-GovQtCLi1'), // replace with your reCAPTCHA v3 site key
+  provider: new ReCaptchaV3Provider('6LcItMgrAAAAANWhC3KA1C1AG6yFFB-GovQtCLi1'), 
   isTokenAutoRefreshEnabled: true
 });
 
@@ -89,7 +92,6 @@ window.likePost = async function(id) {
   await updateDoc(ref, { likes: newLikes });
 };
 
-// Only allow deleting if the post belongs to the current user
 window.deletePost = async function(id) {
   const ref = doc(db, 'newconfessions', id);
   const snap = await getDoc(ref);
@@ -176,7 +178,7 @@ async function attemptToSendConfession() {
       return;
     }
 
-    await addDoc(collection(db, 'newconfessions'), {
+    const docRef = await addDoc(collection(db, 'newconfessions'), {
       text,
       likes: 0,
       replies: [],
@@ -190,7 +192,7 @@ async function attemptToSendConfession() {
       },
     });
 
-    addToLSArray('userPosts', currentUserId);
+    addToLSArray('userPosts', docRef.id);
 
     input.value = '';
     sendSound.play();
@@ -204,7 +206,5 @@ async function attemptToSendConfession() {
 }
 
 sendBtn.addEventListener('click', attemptToSendConfession);
-input.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); attemptToSendConfession(); }
-});
+input.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); attemptToSendConfession(); } });
 input.addEventListener('input', () => { sendBtn.disabled = input.value.trim().length === 0; });
