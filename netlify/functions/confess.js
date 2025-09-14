@@ -1,17 +1,27 @@
+import fetch from "node-fetch";
+
+// Get the secret:
+// - On Netlify, process.env.ORIGIN_SECRET comes from your Netlify environment
+// - Locally, fallback to .env file (Codespaces)
+const ORIGIN_SECRET = process.env.ORIGIN_SECRET || process.env.LOCAL_ORIGIN_SECRET;
+
 export async function handler(event) {
-  const originSecret = process.env.ORIGIN_SECRET; // lives only on server
+  try {
+    const method = event.httpMethod;
+    const body = method !== "GET" ? event.body : undefined;
 
-  const res = await fetch("https://iestea-backend.vercel.app/api/confess", {
-    method: event.httpMethod,
-    headers: {
-      "Content-Type": "application/json",
-      "x-origin-secret": originSecret,
-    },
-    body: ["GET", "HEAD"].includes(event.httpMethod) ? undefined : event.body,
-  });
+    const res = await fetch("https://iestea-backend.vercel.app/api/confess", {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        "x-origin-secret": ORIGIN_SECRET
+      },
+      body
+    });
 
-  return {
-    statusCode: res.status,
-    body: await res.text(),
-  };
+    const data = await res.json();
+    return { statusCode: 200, body: JSON.stringify(data) };
+  } catch (err) {
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+  }
 }
