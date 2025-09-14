@@ -62,15 +62,7 @@ import { getFirestore, collection, query, orderBy, onSnapshot, doc, getDocs, del
 import UAParser from "https://esm.sh/ua-parser-js@1.0.2";
 
 // --- Firebase Config ---
-const firebaseConfig = {
-  apiKey: "AIzaSyAZeTQtlbwI3wWcrRE2e1ReQ50KQeKno8s",
-  authDomain: "iestea.firebaseapp.com",
-  projectId: "iestea",
-  storageBucket: "iestea.firebasestorage.app",
-  messagingSenderId: "484037984669",
-  appId: "1:484037984669:web:2e9d255ef0f3f1afbd6f74",
-  measurementId: "G-ZS7S6J6638"
-};
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
