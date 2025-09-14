@@ -1,10 +1,5 @@
 name: Auto Post Instagram
 
-on:
-  schedule:
-     - cron: '0,20,40 6-19 * * *'
-  workflow_dispatch:
-
 jobs:
   post-confessions:
     runs-on: ubuntu-latest
