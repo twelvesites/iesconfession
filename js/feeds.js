@@ -8,25 +8,30 @@ import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com
 
 // ---------------- FIREBASE CONFIG ----------------
 const firebaseConfig = {
-  apiKey: "AIzaSyDob9nbpu0Y9ebCmxwHBTCyFFCzSjgNFLs",
-  authDomain: "confession-ies.firebaseapp.com",
-  projectId: "confession-ies",
-  storageBucket: "confession-ies.firebasestorage.app",
-  messagingSenderId: "705171117795",
-  appId: "1:705171117795:web:4aa165b3b071a0d6b197d6",
-  measurementId: "G-9347YMJ01Z"
+  apiKey: "AIzaSyAZeTQtlbwI3wWcrRE2e1ReQ50KQeKno8s",
+  authDomain: "iestea.firebaseapp.com",
+  projectId: "iestea",
+  storageBucket: "iestea.firebasestorage.app",
+  messagingSenderId: "484037984669",
+  appId: "1:484037984669:web:2e9d255ef0f3f1afbd6f74",
+  measurementId: "G-ZS7S6J6638"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// ---------------- APP CHECK ----------------
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LcyOskrAAAAABTqqFvbvJPX63KHZqpeDD67uQUw'), // site key
+  isTokenAutoRefreshEnabled: true,
+});
 
 // ---------------- DOM ELEMENTS ----------------
 const feed = document.getElementById('confessionFeed');
 const input = document.getElementById('confessionInput');
 const sendBtn = document.getElementById('sendBtn');
 
-// ---------------- LOCALSTORAGE HELPERS ----------------
+// ---------------- LOCAL STORAGE HELPERS ----------------
 function setLS(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
 function getLS(key) { const val = localStorage.getItem(key); return val ? JSON.parse(val) : null; }
 function addToLSArray(key, value) { let arr = getLS(key) || []; if (!arr.includes(value)) { arr.push(value); setLS(key, arr); } }
@@ -69,7 +74,7 @@ function showModal(message) {
   modalMessage.textContent = message;
   modal.style.display = 'block';
   clearTimeout(showModal.hideTimeout);
-  showModal.hideTimeout = setTimeout(() => { modal.style.display = 'none'; }, 5500);
+  showModal.hideTimeout = setTimeout(() => { modal.style.display = 'none'; }, 3500);
 }
 
 // ---------------- CONFESSION ACTIONS ----------------
@@ -77,8 +82,7 @@ window.likePost = async function(id) {
   const ref = doc(db, 'newconfessions', id);
   const snap = await getDoc(ref);
   if (!snap.exists()) return;
-  const data = snap.data();
-  let newLikes = data.likes || 0;
+  let newLikes = snap.data().likes || 0;
   if (lsHas('likedPosts', id)) { newLikes--; removeFromLSArray('likedPosts', id); } 
   else { newLikes++; addToLSArray('likedPosts', id); }
   await updateDoc(ref, { likes: newLikes });
@@ -88,15 +92,8 @@ window.deletePost = async function(id) {
   const ref = doc(db, 'newconfessions', id);
   const snap = await getDoc(ref);
   if (!snap.exists()) return;
-
-  const data = snap.data();
-  if (data.userId !== currentUserId) {
-    showModal("❌ You can't delete someone else's post!");
-    return;
-  }
-
+  if (snap.data().userId !== currentUserId) { showModal("❌ You can't delete someone else's post!"); return; }
   if (!confirm("Delete your confession? This can't be undone.")) return;
-
   await deleteDoc(ref);
   removeFromLSArray('userPosts', id);
   showModal("✅ Deleted!");
@@ -107,9 +104,7 @@ window.reportPost = async function(id) {
   const ref = doc(db, 'newconfessions', id);
   const snap = await getDoc(ref);
   if (!snap.exists()) return;
-  const data = snap.data();
-  const reports = (data.reports || 0) + 1;
-  await updateDoc(ref, { reports });
+  await updateDoc(ref, { reports: (snap.data().reports || 0) + 1 });
   showModal("✅ Thanks for reporting. We'll check this out.");
 };
 
@@ -124,8 +119,7 @@ function renderConfession(docId, data) {
 
   const card = document.createElement('div');
   card.className = 'confession-box';
-  card.style.position = 'relative';
-  card.onclick = () => { window.location.href = `reply.html?id=${docId}`; };
+  card.onclick = () => window.location.href = `reply.html?id=${docId}`;
 
   const replyCount = data.replies ? data.replies.length : 0;
 
@@ -139,7 +133,6 @@ function renderConfession(docId, data) {
         : `<button onclick="event.stopPropagation(); reportPost('${docId}')">🚩 Report</button>`}
     </div>
   `;
-
   feed.appendChild(card);
 }
 
@@ -147,54 +140,35 @@ function renderConfession(docId, data) {
 const q = query(collection(db, 'newconfessions'), orderBy('createdAt', 'desc'));
 onSnapshot(q, snapshot => {
   feed.innerHTML = '';
-  snapshot.forEach(docSnap => {
-    renderConfession(docSnap.id, docSnap.data());
-  });
+  snapshot.forEach(docSnap => renderConfession(docSnap.id, docSnap.data()));
 });
 
 // ---------------- SEND CONFESSION ----------------
 const sendSound = new Audio('send.mp3');
-
 async function attemptToSendConfession() {
   const text = input.value.trim();
   if (!text) return;
-
   sendBtn.disabled = true;
   showModal("⏳ AI Checking...");
-
   try {
-    const isBlocked = await moderateText(text);
-    if (isBlocked) {
+    if (await moderateText(text)) {
       showModal("🛑 Confessions cannot be harassing or spreading secrets.");
       sendBtn.disabled = false;
       return;
     }
-
     const docRef = await addDoc(collection(db, 'newconfessions'), {
-      text,
-      likes: 0,
-      replies: [],
-      reports: 0,
-      createdAt: Date.now(),
+      text, likes: 0, replies: [], reports: 0, createdAt: Date.now(),
       userId: currentUserId,
-      deviceInfo: {
-        userAgent: navigator.userAgent,
-        platform: navigator.platform,
-        language: navigator.language,
-      },
+      deviceInfo: { userAgent: navigator.userAgent, platform: navigator.platform, language: navigator.language }
     });
-
     addToLSArray('userPosts', docRef.id);
-
     input.value = '';
     sendSound.play();
     showModal("✅ Posted!");
   } catch (e) {
-    console.error("Error:", e);
+    console.error(e);
     showModal("⚠️ Server down, try again.");
-  } finally {
-    sendBtn.disabled = false;
-  }
+  } finally { sendBtn.disabled = false; }
 }
 
 sendBtn.addEventListener('click', attemptToSendConfession);
