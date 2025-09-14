@@ -12,13 +12,13 @@ import {
 
 // --- Firebase Config ---
 const firebaseConfig = {
-  apiKey: "AIzaSyDob9nbpu0Y9ebCmxwHBTCyFFCzSjgNFLs",
-  authDomain: "confession-ies.firebaseapp.com",
-  projectId: "confession-ies",
-  storageBucket: "confession-ies.firebasestorage.app",
-  messagingSenderId: "705171117795",
-  appId: "1:705171117795:web:4aa165b3b071a0d6b197d6",
-  measurementId: "G-9347YMJ01Z"
+  apiKey: "AIzaSyAZeTQtlbwI3wWcrRE2e1ReQ50KQeKno8s",
+  authDomain: "iestea.firebaseapp.com",
+  projectId: "iestea",
+  storageBucket: "iestea.firebasestorage.app",
+  messagingSenderId: "484037984669",
+  appId: "1:484037984669:web:2e9d255ef0f3f1afbd6f74",
+  measurementId: "G-ZS7S6J6638"
 };
 
 const app = initializeApp(firebaseConfig);
