@@ -33,7 +33,7 @@ function showModal(message) {
 }
 
 // ------------------- API HELPERS -------------------
-const API_URL = "/.netlify/functions/confess"; // no secret in frontend
+const API_URL = "/.netlify/functions/confess"; // production only
 
 async function apiCall(method = "GET", body) {
   try {
@@ -115,7 +115,7 @@ async function reportPost(id) {
 
 // ------------------- COOLDOWN -------------------
 const COOLDOWN_KEY = "sendCooldownEnd";
-const COOLDOWN_DURATION = 60 * 1000; // 60s
+const COOLDOWN_DURATION = 60 * 1000;
 let cooldownInterval;
 
 function startCooldown() {
@@ -167,7 +167,7 @@ async function sendConfession() {
   showModal("⏳ AI checking...");
 
   try {
-    // --- moderation ---
+    // moderation
     const MODERATION_API_URL = "https://twelve-ai.vercel.app/api/moderate";
     let modData = { verdict: "ALLOW" };
     try {
@@ -218,7 +218,7 @@ input.addEventListener('keydown', e => {
 // ------------------- INITIAL LOAD -------------------
 fetchFeed();
 
-// Make functions global for inline onclick in buttons
+// Make functions global for inline onclick
 window.likePost = likePost;
 window.deletePost = deletePost;
 window.reportPost = reportPost;

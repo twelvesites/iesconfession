@@ -1,9 +1,7 @@
 import fetch from "node-fetch";
 
-// Get the secret:
-// - On Netlify, process.env.ORIGIN_SECRET comes from your Netlify environment
-// - Locally, fallback to .env file (Codespaces)
-const ORIGIN_SECRET = process.env.ORIGIN_SECRET || process.env.LOCAL_ORIGIN_SECRET;
+// ✅ Only read the secret from environment variables
+const ORIGIN_SECRET = process.env.ORIGIN_SECRET;
 
 export async function handler(event) {
   try {
@@ -22,6 +20,7 @@ export async function handler(event) {
     const data = await res.json();
     return { statusCode: 200, body: JSON.stringify(data) };
   } catch (err) {
+    console.error("Function error:", err);
     return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
 }
