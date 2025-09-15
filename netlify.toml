@@ -6,13 +6,8 @@ command = "echo 'No build command needed'"
 directory = "netlify/functions"
 
 [secrets_scanning]
-enabled = true
+enabled = false # or set to true if you want to use the ignore lists below
 omit_paths = [
   "about.html",
   "analytics.js"
 ]
-
-[dev]
-[dev.environment]
-VERCEL_API_URL = "https://iestea-backend.vercel.app/api/confess"
-VERCEL_ORIGIN_SECRET = "f1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef"
