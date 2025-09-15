@@ -2,3 +2,6 @@ auto-Instagram-posting-bot/ig_session.json
 
 # Local Netlify folder
 .env
+
+# Local Netlify folder
+.netlify
