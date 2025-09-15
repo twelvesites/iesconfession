@@ -6,7 +6,11 @@ command = "echo 'No build command needed'"
 directory = "netlify/functions"
 
 [secrets_scanning]
-enabled = false
+enabled = true
+omit_paths = [
+  "about.html",
+  "analytics.js"
+]
 
 [dev]
 [dev.environment]
