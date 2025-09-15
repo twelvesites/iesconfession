@@ -14,7 +14,5 @@ omit_paths = [
 
 [dev]
 [dev.environment]
-# Environment variables for local development only
-# Remove the hard-coded values from here and put them in your .env file
 VERCEL_API_URL = "https://iestea-backend.vercel.app/api/confess"
-VERCEL_ORIGIN_SECRET = "YOUR_SECRET_KEY_HERE"
+VERCEL_ORIGIN_SECRET = "f1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef"
