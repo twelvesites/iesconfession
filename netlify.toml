@@ -1,5 +1,0 @@
-[secrets_scanning]
-enabled = true
-omit_keys = [
-  "FIREBASE_PROJECT_ID"
-]

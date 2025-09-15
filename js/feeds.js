@@ -33,11 +33,12 @@ function showModal(message) {
 }
 
 // ------------------- API HELPERS -------------------
-const API_URL = "/.netlify/functions/confess";
+const API_URL = "https://iestea-backend.vercel.app/api/confess";
+const ORIGIN_SECRET = "f1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef";
 
 async function apiGet() {
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL, { headers: { "x-origin-secret": ORIGIN_SECRET } });
     if (!res.ok) throw new Error(`Server error ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -51,7 +52,7 @@ async function apiPost(body) {
   try {
     const res = await fetch(API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-origin-secret": ORIGIN_SECRET },
       body: JSON.stringify(body)
     });
     if (!res.ok) throw new Error(`Server error ${res.status}`);
@@ -67,7 +68,7 @@ async function apiPatch(body) {
   try {
     const res = await fetch(API_URL, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-origin-secret": ORIGIN_SECRET },
       body: JSON.stringify(body)
     });
     if (!res.ok) throw new Error(`Server error ${res.status}`);
@@ -83,7 +84,7 @@ async function apiDelete(body) {
   try {
     const res = await fetch(API_URL, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-origin-secret": ORIGIN_SECRET },
       body: JSON.stringify(body)
     });
     if (!res.ok) throw new Error(`Server error ${res.status}`);
@@ -107,6 +108,7 @@ function renderConfession(doc) {
   card.style.position = 'relative';
   card.innerHTML = `
     <div class="confession-text">${data.text}</div>
+    <!-- <div class="confession-meta">Posted at: ${new Date(data.createdAt).toLocaleString()}</div> -->
     <div class="like-reply-bar">
       <button onclick="event.stopPropagation(); likePost('${docId}')">${liked ? '❤️' : '🤍'} ${data.likes || 0}</button>
       ${isMine
@@ -116,6 +118,7 @@ function renderConfession(doc) {
   `;
   feed.appendChild(card);
 }
+
 
 // ------------------- FEED -------------------
 async function fetchFeed() {
@@ -264,3 +267,4 @@ window.likePost = likePost;
 window.deletePost = deletePost;
 window.reportPost = reportPost;
 window.sendConfession = sendConfession;
+
