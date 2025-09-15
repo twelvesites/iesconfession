@@ -7,6 +7,3 @@ directory = "netlify/functions"
 
 [secrets_scanning]
 enabled = false
-omit_keys = [
-  "FIREBASE_PROJECT_ID"
-]
