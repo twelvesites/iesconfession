@@ -14,5 +14,6 @@ omit_paths = [
 
 [dev]
 [dev.environment]
+# These keys reference the environment variables you set in your Netlify dashboard
 VERCEL_API_URL = "https://iestea-backend.vercel.app/api/confess"
 VERCEL_ORIGIN_SECRET = "f1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef"
