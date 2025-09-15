@@ -6,8 +6,7 @@ command = "echo 'No build command needed'"
 directory = "netlify/functions"
 
 [secrets_scanning]
-enabled = false
-omit_paths = [
-  "about.html",
-  "analytics.js"
+enabled = true
+omit_keys = [
+  "FIREBASE_PROJECT_ID"
 ]
