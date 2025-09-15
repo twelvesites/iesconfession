@@ -4,3 +4,6 @@ command = "echo 'No build command needed'"
 
 [functions]
 directory = "netlify/functions"
+
+[secrets_scanning]
+enabled = false

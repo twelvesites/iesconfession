@@ -35,8 +35,6 @@ function showModal(message) {
 // ------------------- API HELPERS -------------------
 // The API URL is now your Netlify Function endpoint
 const API_URL = "/.netlify/functions/confess";
-// The secret is removed from here
-// const ORIGIN_SECRET = "f1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef";
 
 async function apiGet() {
   try {
