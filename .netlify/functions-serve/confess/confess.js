@@ -1,1 +1,1 @@
-module.exports = require('./netlify/functions/confess/confess.js')
+module.exports = require('./netlify/functions/confess.js')

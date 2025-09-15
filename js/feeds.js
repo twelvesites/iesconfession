@@ -33,12 +33,10 @@ function showModal(message) {
 }
 
 // ------------------- API HELPERS -------------------
-// The API URL is now your Netlify Function endpoint
 const API_URL = "/.netlify/functions/confess";
 
 async function apiGet() {
   try {
-    // The secret is no longer included in the header on the front end
     const res = await fetch(API_URL);
     if (!res.ok) throw new Error(`Server error ${res.status}`);
     return await res.json();
@@ -51,7 +49,6 @@ async function apiGet() {
 
 async function apiPost(body) {
   try {
-    // The secret is no longer included in the header on the front end
     const res = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -68,7 +65,6 @@ async function apiPost(body) {
 
 async function apiPatch(body) {
   try {
-    // The secret is no longer included in the header on the front end
     const res = await fetch(API_URL, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -85,7 +81,6 @@ async function apiPatch(body) {
 
 async function apiDelete(body) {
   try {
-    // The secret is no longer included in the header on the front end
     const res = await fetch(API_URL, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },

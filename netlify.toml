@@ -1,9 +1,14 @@
 [build]
 publish = "."
 command = "echo 'No build command needed'"
-  
-  [build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "ORIGIN_SECRET, FIREBASE_PROJECT_ID"
-  
+
 [functions]
 directory = "netlify/functions"
+
+[secrets_scanning]
+enabled = false
+
+[dev]
+[dev.environment]
+VERCEL_API_URL = "https://iestea-backend.vercel.app/api/confess"
+VERCEL_ORIGIN_SECRET = "f1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef"
