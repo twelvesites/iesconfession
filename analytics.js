@@ -10,16 +10,7 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// --- Firebase Config ---
-const firebaseConfig = {
-  apiKey: "AIzaSyAZeTQtlbwI3wWcrRE2e1ReQ50KQeKno8s",
-  authDomain: "iestea.firebaseapp.com",
-  projectId: "iestea",
-  storageBucket: "iestea.firebasestorage.app",
-  messagingSenderId: "484037984669",
-  appId: "1:484037984669:web:2e9d255ef0f3f1afbd6f74",
-  measurementId: "G-ZS7S6J6638"
-};
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
