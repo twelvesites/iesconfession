@@ -1,9 +1,9 @@
 [build]
 publish = "."
 command = "echo 'No build command needed'"
-
+  
+  [build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "ORIGIN_SECRET, FIREBASE_PROJECT_ID"
+  
 [functions]
 directory = "netlify/functions"
-
-[secrets_scanning]
-enabled = false
