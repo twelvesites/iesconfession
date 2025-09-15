@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Admin Panel - IES Confessions</title>
   <style>
     body { font-family: Arial, sans-serif; background: #f8f9fa; padding: 20px; margin:0; }
@@ -16,7 +16,6 @@
     .meta-section { margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd; }
     .meta button { background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
     .meta button:hover { background: darkred; }
-    .sessions-container { margin-top: 10px; padding: 10px; background: #f1f1f1; border-radius: 5px; }
     pre { font-size:13px; background:#f1f1f1; padding:8px; border-radius:5px; overflow-x:auto; }
   </style>
 </head>
@@ -24,196 +23,140 @@
 
 <h1>🚨 Admin Dashboard - TWELVE</h1>
 
-<!-- Stats Row -->
 <div class="stats-container">
-  <div class="stat-box">
-    <strong id="totalConfessions">0</strong>
-    Total Confessions
-  </div>
-  <div class="stat-box">
-    <strong id="totalFeedbacks">0</strong>
-    Total Feedbacks
-  </div>
-  <div class="stat-box">
-    <strong id="totalVisitors">0</strong>
-    Total Visitors
-  </div>
-  <div class="stat-box">
-    <strong id="avgVisitors">0</strong>
-    Avg Visitors/Day
-  </div>
-  <div class="stat-box">
-    <strong id="recentVisitor">N/A</strong>
-    Most Recent Visitor
-  </div>
+  <div class="stat-box"><strong id="totalConfessions">0</strong>Total Confessions</div>
+  <div class="stat-box"><strong id="totalFeedbacks">0</strong>Total Feedbacks</div>
+  <div class="stat-box"><strong id="totalVisitors">0</strong>Total Visitors</div>
+  <div class="stat-box"><strong id="avgVisitors">0</strong>Avg Visitors/Day</div>
+  <div class="stat-box"><strong id="recentVisitor">N/A</strong>Most Recent Visitor</div>
 </div>
 
-<!-- Confession Feed -->
 <h2>📢 Confessions</h2>
 <div id="adminFeed"></div>
 
-<!-- Visitor Analytics -->
 <h2>👥 Visitor Analytics</h2>
 <div id="adminVisitors"></div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, query, orderBy, onSnapshot, doc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import UAParser from "https://esm.sh/ua-parser-js@1.0.2";
+  // Remove all Firebase client-side imports as the backend will handle database access
+  
+  // ---------------- API CONFIGURATION ----------------
+  const API_URL = "https://iestea-backend.vercel.app/api/confess";
+  const ORIGIN_SECRET = "f1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef";
 
-// --- Firebase Config ---
+  // ---------------- DOM ELEMENTS ----------------
+  const totalConfessionsEl = document.getElementById('totalConfessions');
+  const totalVisitorsEl = document.getElementById('totalVisitors');
+  const avgVisitorsEl = document.getElementById('avgVisitors');
+  const recentVisitorEl = document.getElementById('recentVisitor');
+  const adminFeed = document.getElementById('adminFeed');
+  const adminVisitorsContainer = document.getElementById('adminVisitors');
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+  // ---------------- HELPERS ----------------
+  function escapeHTML(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
 
-// --- DOM Elements ---
-const totalConfessionsEl = document.getElementById('totalConfessions');
-const totalFeedbackEl = document.getElementById('totalFeedbacks');
-const totalVisitorsEl = document.getElementById('totalVisitors');
-const avgVisitorsEl = document.getElementById('avgVisitors');
-const recentVisitorEl = document.getElementById('recentVisitor');
-const adminFeed = document.getElementById('adminFeed');
-const adminVisitorsContainer = document.getElementById('adminVisitors');
+  function formatTimestamp(ts) {
+    if (!ts) return "Unknown";
+    return new Date(ts).toLocaleString();
+  }
 
-// --- Helpers ---
-function escapeHTML(text) {
-  const div = document.createElement('div'); 
-  div.textContent = text; 
-  return div.innerHTML;
-}
-
-function formatTimestamp(ts) {
-  if (!ts) return "Unknown";
-  if (ts.toDate) return ts.toDate().toLocaleString();
-  return new Date(ts).toLocaleString();
-}
-
-// --- Persistent Visitor ID ---
-let visitorId = localStorage.getItem('visitorId');
-if (!visitorId) {
-  visitorId = crypto.randomUUID();
-  localStorage.setItem('visitorId', visitorId);
-}
-
-// --- Render Confession ---
-function renderAdminCard(docId, data) {
-  const { text, createdAt, userId, reports, language, platform, userAgent, likes, replies, deviceInfo = {} } = data;
-  const date = formatTimestamp(createdAt);
-  const box = document.createElement('div');
-  box.className = 'confession-box';
-  box.innerHTML = `
-    <div class="confession-text">${escapeHTML(text || "[No Text]")}</div>
-    <div class="meta"><strong>📅 Submitted:</strong> ${date}</div>
-    <div class="meta"><strong>🧑 User ID:</strong> ${userId || "N/A"}</div>
-    <div class="meta"><strong>⚠️ Reports:</strong> ${reports || 0}</div>
-    <div class="meta"><strong>❤️ Likes:</strong> ${likes || 0}</div>
-    <div class="meta"><strong>💬 Replies:</strong> ${replies?.length || 0}</div>
-    <div class="meta"><strong>🌐 Language:</strong> ${language || "N/A"}</div>
-    <div class="meta"><strong>💻 Platform:</strong> ${platform || "N/A"}</div>
-    <div class="meta"><strong>🕵️ User Agent:</strong> ${userAgent || "N/A"}</div>
-    <div class="meta"><strong>📱 Device Info:</strong><pre>${escapeHTML(JSON.stringify(deviceInfo, null, 2))}</pre></div>
-    <div class="meta"><button onclick="deleteConfession('${docId}')">🗑️ Delete Confession</button></div>
-  `;
-  adminFeed.appendChild(box);
-}
-
-// --- Delete Confession ---
-window.deleteConfession = async function(id){
-  if(!confirm("Delete this confession?")) return;
-  await deleteDoc(doc(db,'newconfessions',id));
-};
-
-// --- Load Confessions ---
-function loadConfessions(){
-  const q = query(collection(db,'newconfessions'),orderBy('createdAt','desc'));
-  onSnapshot(q,snap=>{
-    adminFeed.innerHTML='';
-    snap.forEach(d=>renderAdminCard(d.id,d.data()));
-    totalConfessionsEl.textContent=snap.size;
-  });
-}
-
-// --- Load Feedbacks ---
-async function loadFeedbacks(){
-  const snap = await getDocs(collection(db,'feedbacks'));
-  totalFeedbackEl.textContent = snap.size;
-}
-
-// --- Render Visitors ---
-async function renderVisitors(){
-  const snap = await getDocs(collection(db,"visitors"));
-  const visitorsRaw = snap.docs.map(d=>({id:d.id,...d.data()}));
-  adminVisitorsContainer.innerHTML='';
-
-  // Merge visitors by persistent ID
-  const visitorsMap = {};
-  for (const v of visitorsRaw) {
-    const id = v.id === visitorId ? visitorId : v.id;
-    if (!visitorsMap[id]) visitorsMap[id] = v;
-    else {
-      visitorsMap[id].visitCount = (visitorsMap[id].visitCount || 0) + (v.visitCount || 0);
-      visitorsMap[id].firstVisitAt = visitorsMap[id].firstVisitAt < v.firstVisitAt ? visitorsMap[id].firstVisitAt : v.firstVisitAt;
-      visitorsMap[id].lastVisitAt = visitorsMap[id].lastVisitAt > v.lastVisitAt ? visitorsMap[id].lastVisitAt : v.lastVisitAt;
+  // ---------------- Confession Functions ----------------
+  async function fetchConfessions() {
+    try {
+      const response = await fetch(API_URL, {
+        method: "GET",
+        headers: {
+          "x-origin-secret": ORIGIN_SECRET
+        }
+      });
+      const data = await response.json();
+      if (data.ok) {
+        return data.confessions.map(c => ({ id: c.id, ...c.data }));
+      } else {
+        throw new Error(data.error);
+      }
+    } catch (error) {
+      console.error("Error fetching confessions from API:", error);
+      throw error;
     }
   }
 
-  const visitors = Object.values(visitorsMap);
-  visitors.sort((a,b)=>{
-    const aT = a.lastVisitAt?.toDate ? a.lastVisitAt.toDate().getTime() : 0;
-    const bT = b.lastVisitAt?.toDate ? b.lastVisitAt.toDate().getTime() : 0;
-    return bT-aT;
-  });
-
-  for (const v of visitors) {
-    const sessionsSnap = await getDocs(collection(db,"visitors",v.id,"sessions"));
-    const sessions = sessionsSnap.docs.map(s=>s.data());
-    const ua = new UAParser(v.userAgent||"").getResult();
+  function renderAdminCard(id, data) {
+    const { text, createdAt, userId, reports, language, platform, userAgent, likes, replies, deviceInfo = {} } = data;
     const box = document.createElement('div');
-    box.className='visitor-box';
-    box.innerHTML=`
-      <h3>Visitor ID: ${escapeHTML(v.id)}</h3>
-      <p>First Visit: ${formatTimestamp(v.firstVisitAt)}</p>
-      <p>Last Visit: ${formatTimestamp(v.lastVisitAt)}</p>
-      <p>Total Visits: ${v.visitCount||0}</p>
-      <p>Device: ${ua.device.vendor||'Unknown'} ${ua.device.model||ua.device.type||'Unknown'}</p>
-      <p>OS: ${ua.os.name||'Unknown'} ${ua.os.version||''}</p>
-      <p>Browser: ${ua.browser.name||'Unknown'} ${ua.browser.version||''}</p>
-      <p>Screen: ${v.deviceInfo?.screenResolution||'Unknown'}</p>
-      <p>Language: ${v.deviceInfo?.language||'Unknown'}</p>
-      <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
-        Toggle Sessions (${sessions.length})
-      </button>
-      <div class="sessions-container" style="display:none">
-        ${sessions.map(s=>`<div><p>Visited At: ${formatTimestamp(s.visitedAt)}</p><p>Page: ${escapeHTML(s.page)}</p></div>`).join('')}
-      </div>
+    box.className = 'confession-box';
+    box.innerHTML = `
+      <div class="confession-text">${escapeHTML(text || "[No Text]")}</div>
+      <div class="meta"><strong>📅 Submitted:</strong> ${formatTimestamp(createdAt)}</div>
+      <div class="meta"><strong>🧑 User ID:</strong> ${userId || "N/A"}</div>
+      <div class="meta"><strong>⚠️ Reports:</strong> ${reports || 0}</div>
+      <div class="meta"><strong>❤️ Likes:</strong> ${likes || 0}</div>
+      <div class="meta"><strong>💬 Replies:</strong> ${replies?.length || 0}</div>
+      <div class="meta"><strong>🌐 Language:</strong> ${language || "N/A"}</div>
+      <div class="meta"><strong>💻 Platform:</strong> ${platform || "N/A"}</div>
+      <div class="meta"><strong>🕵️ User Agent:</strong> ${userAgent || "N/A"}</div>
+      <div class="meta"><strong>📱 Device Info:</strong><pre>${escapeHTML(JSON.stringify(deviceInfo, null, 2))}</pre></div>
+      <div class="meta"><button onclick="deleteConfession('${id}', '${userId}')">🗑️️ Delete Confession</button></div>
     `;
-    adminVisitorsContainer.appendChild(box);
+    adminFeed.appendChild(box);
   }
 
-  // Stats
-  totalVisitorsEl.textContent=visitors.length;
-  if(visitors.length){
-    const first = visitors.reduce((earliest,v)=>{
-      const t=v.firstVisitAt?.toDate?v.firstVisitAt.toDate():new Date();
-      return !earliest||t<earliest?t:earliest;
-    },null);
-    const last = visitors.reduce((latest,v)=>{
-      const t=v.lastVisitAt?.toDate?v.lastVisitAt.toDate():new Date();
-      return !latest||t>latest?t:latest;
-    },null);
-    const days = Math.max((last-first)/(1000*60*60*24),1);
-    avgVisitorsEl.textContent=(visitors.length/days).toFixed(1);
-    recentVisitorEl.textContent=visitors[0]?.id||"N/A";
+  window.deleteConfession = async function(id, userId) {
+  if (!confirm("Delete this confession?")) return;
+  try {
+    const response = await fetch(API_URL, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "x-origin-secret": ORIGIN_SECRET
+      },
+      // Now including userId
+      body: JSON.stringify({ id, userId }) 
+    });
+    const data = await response.json();
+    if (data.ok) {
+      loadConfessions();
+    } else {
+      throw new Error(data.error);
+    }
+  } catch (error) {
+    console.error("Error deleting document via API:", error);
+    alert("Error deleting: " + error.message);
   }
-}
+};
 
-// --- Initialize ---
-loadConfessions();
-loadFeedbacks();
-renderVisitors();
+  async function loadConfessions() {
+    adminFeed.innerHTML = "";
+    try {
+      const confessions = await fetchConfessions();
+      confessions.forEach(c => renderAdminCard(c.id, c));
+      totalConfessionsEl.textContent = confessions.length;
+    } catch (error) {
+      console.error("Error loading confessions:", error);
+      totalConfessionsEl.textContent = "Error";
+      adminFeed.innerHTML = `<p style="color:red;">Error: Failed to load data from backend. Please check the API URL and secret.</p>`;
+    }
+  }
 
+  // ---------------- Visitor Functions ----------------
+  // Note: Your backend API does not have an endpoint for visitor data.
+  // This function will fail until you create one.
+  async function loadVisitors() {
+    adminVisitorsContainer.innerHTML = `<p>Visitor data is not available. A backend endpoint is needed.</p>`;
+    totalVisitorsEl.textContent = "N/A";
+    avgVisitorsEl.textContent = "N/A";
+    recentVisitorEl.textContent = "N/A";
+  }
 
+  // ---------------- INIT ----------------
+  // Directly call the load functions
+  loadConfessions();
+  loadVisitors();
 </script>
-<script src="js/security.js"></script>
+
 </body>
 </html>

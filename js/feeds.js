@@ -1,1 +1,273 @@
-const C=Q;function v(){const G=['\u26a0\ufe0f\x20\x43\x6f\x75\x6c\x64\x20\x6e\x6f\x74\x20\x75\x70\x64\x61\x74\x65\x20\x70\x6f\x73\x74','\x6c\x69\x6b\x65\x73','\x63\x6c\x61\x73\x73\x4e\x61\x6d\x65','\x74\x6f\x4c\x6f\x63\x61\x6c\x65\x53\x74\x72\x69\x6e\x67','\x64\x61\x74\x61','\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72','\x53\x65\x72\x76\x65\x72\x20\x65\x72\x72\x6f\x72\x20','\x64\x69\x73\x70\x6c\x61\x79','\x74\x65\x78\x74','\x33\x36\x49\x6d\x54\x51\x49\x5a','\x35\x37\x32\x38\x32\x30\x4f\x74\x73\x53\x4b\x62','\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64','\u2705\x20\x52\x65\x70\x6f\x72\x74\x65\x64\x20\x73\x75\x63\x63\x65\x73\x73\x66\x75\x6c\x6c\x79','\x66\x6f\x72\x45\x61\x63\x68','\x6c\x69\x6b\x65','\x74\x72\x69\x6d','\x75\x73\x65\x72\x41\x67\x65\x6e\x74','\u23f3\x20\x50\x6c\x65\x61\x73\x65\x20\x77\x61\x69\x74\x20','\x6e\x6f\x6e\x65','\x70\x6c\x61\x74\x66\x6f\x72\x6d','\x52\x65\x70\x6f\x72\x74\x20\x74\x68\x69\x73\x20\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x3f','\x6c\x69\x6b\x65\x64\x50\x6f\x73\x74\x73','\x70\x72\x65\x76\x65\x6e\x74\x44\x65\x66\x61\x75\x6c\x74','\u2705\x20\x50\x6f\x73\x74\x65\x64\x21','\x66\x31\x62\x32\x63\x33\x64\x34\x65\x35\x66\x36\x37\x38\x39\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x61\x62\x63\x64\x65\x66\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x61\x62\x63\x64\x65\x66\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x61\x62\x63\x64\x65\x66','\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x46\x65\x65\x64','\x68\x74\x74\x70\x73\x3a\x2f\x2f\x74\x77\x65\x6c\x76\x65\x2d\x61\x69\x2e\x76\x65\x72\x63\x65\x6c\x2e\x61\x70\x70\x2f\x61\x70\x69\x2f\x6d\x6f\x64\x65\x72\x61\x74\x65','\x41\x50\x49\x20\x47\x45\x54\x20\x65\x72\x72\x6f\x72\x3a','\x63\x6c\x69\x63\x6b','\x73\x65\x6e\x64\x43\x6f\x6f\x6c\x64\x6f\x77\x6e\x45\x6e\x64','\x44\x45\x4c\x45\x54\x45','\x75\x73\x65\x72\x49\x64','\x62\x6c\x6f\x63\x6b','\x37\x30\x36\x31\x37\x36\x38\x63\x4c\x79\x7a\x76\x43','\x73\x65\x74\x49\x74\x65\x6d','\x41\x50\x49\x20\x50\x4f\x53\x54\x20\x65\x72\x72\x6f\x72\x3a','\x68\x74\x74\x70\x73\x3a\x2f\x2f\x69\x65\x73\x74\x65\x61\x2d\x62\x61\x63\x6b\x65\x6e\x64\x2e\x76\x65\x72\x63\x65\x6c\x2e\x61\x70\x70\x2f\x61\x70\x69\x2f\x63\x6f\x6e\x66\x65\x73\x73','\x73\x6f\x72\x74','\x35\x39\x37\x35\x34\x30\x30\x65\x4f\x75\x4f\x67\x41','\x72\x65\x70\x6f\x72\x74\x50\x6f\x73\x74','\x69\x6e\x63\x6c\x75\x64\x65\x73','\x70\x61\x72\x73\x65','\x63\x72\x65\x61\x74\x65\x64\x41\x74','\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c','\x76\x61\x6c\x75\x65','\x64\x69\x76','\x53\x65\x6e\x64','\x73\x74\x61\x74\x75\x73','\x64\x69\x73\x61\x62\x6c\x65\x64','\x41\x4c\x4c\x4f\x57','\x4d\x6f\x64\x65\x72\x61\x74\x69\x6f\x6e\x20\x73\x6b\x69\x70\x70\x65\x64','\x3c\x62\x75\x74\x74\x6f\x6e\x20\x6f\x6e\x63\x6c\x69\x63\x6b\x3d\x22\x65\x76\x65\x6e\x74\x2e\x73\x74\x6f\x70\x50\x72\x6f\x70\x61\x67\x61\x74\x69\x6f\x6e\x28\x29\x3b\x20\x64\x65\x6c\x65\x74\x65\x50\x6f\x73\x74\x28\x27','\x32\x34\x37\x32\x31\x32\x30\x6d\x67\x73\x73\x6d\x4e','\x73\x20\x62\x65\x66\x6f\x72\x65\x20\x73\x65\x6e\x64\x69\x6e\x67\x20\x61\x67\x61\x69\x6e','\x45\x6e\x74\x65\x72','\x73\x65\x6e\x64\x42\x74\x6e','\x67\x65\x74\x49\x74\x65\x6d','\x63\x65\x69\x6c','\x36\x32\x36\x34\x35\x38\x38\x55\x6c\x55\x6a\x43\x43','\x0a\x20\x20\x20\x20\x3c\x64\x69\x76\x20\x63\x6c\x61\x73\x73\x3d\x22\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x2d\x74\x65\x78\x74\x22\x3e','\x73\x65\x6e\x64\x43\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e','\x70\x75\x73\x68','\x41\x50\x49\x20\x44\x45\x4c\x45\x54\x45\x20\x65\x72\x72\x6f\x72\x3a','\x72\x65\x6c\x61\x74\x69\x76\x65','\x61\x70\x70\x6c\x69\x63\x61\x74\x69\x6f\x6e\x2f\x6a\x73\x6f\x6e','\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x49\x6e\x70\x75\x74','\x36\x38\x36\x30\x6b\x75\x7a\x54\x6d\x47','\x6b\x65\x79','\x73\x74\x79\x6c\x65','\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64','\x68\x69\x64\x65\x54\x69\x6d\x65\x6f\x75\x74','\x6c\x65\x6e\x67\x74\x68','\x74\x65\x78\x74\x43\x6f\x6e\x74\x65\x6e\x74','\u26a0\ufe0f\x20\x43\x6f\x75\x6c\x64\x20\x6e\x6f\x74\x20\x64\x65\x6c\x65\x74\x65\x20\x70\x6f\x73\x74','\x41\x50\x49\x20\x50\x41\x54\x43\x48\x20\x65\x72\x72\x6f\x72\x3a','\x6a\x73\x6f\x6e','\x72\x61\x6e\x64\x6f\x6d\x55\x55\x49\x44','\x76\x65\x72\x64\x69\x63\x74','\x6d\x6f\x64\x61\x6c\x4d\x65\x73\x73\x61\x67\x65','\x64\x65\x6c\x65\x74\x65\x50\x6f\x73\x74','\x32\x30\x37\x62\x72\x78\x72\x47\x47','\x36\x36\x32\x33\x32\x33\x38\x76\x55\x6a\x64\x6e\x47','\x6c\x61\x6e\x67\x75\x61\x67\x65','\x6c\x69\x6b\x65\x50\x6f\x73\x74','\x50\x41\x54\x43\x48','\x3c\x2f\x64\x69\x76\x3e\x20\x2d\x2d\x3e\x0a\x20\x20\x20\x20\x3c\x64\x69\x76\x20\x63\x6c\x61\x73\x73\x3d\x22\x6c\x69\x6b\x65\x2d\x72\x65\x70\x6c\x79\x2d\x62\x61\x72\x22\x3e\x0a\x20\x20\x20\x20\x20\x20\x3c\x62\x75\x74\x74\x6f\x6e\x20\x6f\x6e\x63\x6c\x69\x63\x6b\x3d\x22\x65\x76\x65\x6e\x74\x2e\x73\x74\x6f\x70\x50\x72\x6f\x70\x61\x67\x61\x74\x69\x6f\x6e\x28\x29\x3b\x20\x6c\x69\x6b\x65\x50\x6f\x73\x74\x28\x27','\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x73','\x6e\x6f\x77','\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74','\x73\x74\x72\x69\x6e\x67\x69\x66\x79','\x65\x72\x72\x6f\x72','\x33\x4d\x6c\x64\x57\x4e\x52','\x3c\x2f\x64\x69\x76\x3e\x0a\x20\x20\x20\x20\x3c\x21\x2d\x2d\x20\x3c\x64\x69\x76\x20\x63\x6c\x61\x73\x73\x3d\x22\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x2d\x6d\x65\x74\x61\x22\x3e\x50\x6f\x73\x74\x65\x64\x20\x61\x74\x3a\x20','\u26a0\ufe0f\x20\x43\x6f\x75\x6c\x64\x20\x6e\x6f\x74\x20\x6c\x6f\x61\x64\x20\x66\x65\x65\x64'];v=function(){return G;};return v();}(function(s,k){const z=Q,n=s();while(!![]){try{const F=parseInt(z(0xba))/0x1*(-parseInt(z(0xac))/0x2)+parseInt(z(0xc5))/0x3*(parseInt(z(0xa4))/0x4)+-parseInt(z(0x9e))/0x5+-parseInt(z(0xbb))/0x6+parseInt(z(0xe9))/0x7+parseInt(z(0x90))/0x8+parseInt(z(0xd1))/0x9*(-parseInt(z(0xd2))/0xa);if(F===k)break;else n['push'](n['shift']());}catch(K){n['push'](n['shift']());}}}(v,0xbf84d));const feed=document[C(0xd3)](C(0xe1)),input=document[C(0xd3)](C(0xab)),sendBtn=document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64'](C(0xa1));function setLS(s,k){const c=C;localStorage[c(0xea)](s,JSON[c(0xc3)](k));}function getLS(s){const t=C,k=localStorage[t(0xa2)](s);return k?JSON[t(0x93)](k):null;}function addToLSArray(s,k){const S=C;let n=getLS(s)||[];!n['\x69\x6e\x63\x6c\x75\x64\x65\x73'](k)&&(n[S(0xa7)](k),setLS(s,n));}function removeFromLSArray(s,k){let n=getLS(s)||[];n=n['\x66\x69\x6c\x74\x65\x72'](F=>F!==k),setLS(s,n);}function lsHas(s,k){const p=C;let n=getLS(s)||[];return n[p(0x92)](k);}function getOrCreateUserId(){const d=C;let s=localStorage[d(0xa2)](d(0xe7));return!s&&(s=crypto[d(0xb6)](),localStorage[d(0xea)](d(0xe7),s)),s;}const currentUserId=getOrCreateUserId();function showModal(s){const e=C,k=document[e(0xd3)]('\x6d\x6f\x64\x61\x6c'),n=document[e(0xd3)](e(0xb8));if(!k||!n)return;n[e(0xb2)]=s,k[e(0xae)][e(0xcf)]=e(0xe8),clearTimeout(showModal[e(0xb0)]),showModal[e(0xb0)]=setTimeout(()=>{const i=e;k[i(0xae)][i(0xcf)]=i(0xda);},0x157c);}const API_URL=C(0xec),ORIGIN_SECRET=C(0xe0);async function apiGet(){const U=C;try{const s=await fetch(API_URL,{'\x68\x65\x61\x64\x65\x72\x73':{'\x78\x2d\x6f\x72\x69\x67\x69\x6e\x2d\x73\x65\x63\x72\x65\x74':ORIGIN_SECRET}});if(!s['\x6f\x6b'])throw new Error(U(0xce)+s[U(0x99)]);return await s[U(0xb5)]();}catch(k){return console[U(0xc4)](U(0xe3),k),showModal(U(0xc7)),{'\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x73':[]};}}async function apiPost(s){const Y=C;try{const k=await fetch(API_URL,{'\x6d\x65\x74\x68\x6f\x64':'\x50\x4f\x53\x54','\x68\x65\x61\x64\x65\x72\x73':{'\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65':'\x61\x70\x70\x6c\x69\x63\x61\x74\x69\x6f\x6e\x2f\x6a\x73\x6f\x6e','\x78\x2d\x6f\x72\x69\x67\x69\x6e\x2d\x73\x65\x63\x72\x65\x74':ORIGIN_SECRET},'\x62\x6f\x64\x79':JSON[Y(0xc3)](s)});if(!k['\x6f\x6b'])throw new Error('\x53\x65\x72\x76\x65\x72\x20\x65\x72\x72\x6f\x72\x20'+k[Y(0x99)]);return await k[Y(0xb5)]();}catch(n){return console['\x65\x72\x72\x6f\x72'](Y(0xeb),n),showModal('\u26a0\ufe0f\x20\x43\x6f\x75\x6c\x64\x20\x6e\x6f\x74\x20\x73\x65\x6e\x64\x20\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e'),{'\x6f\x6b':![]};}}async function apiPatch(s){const P=C;try{const k=await fetch(API_URL,{'\x6d\x65\x74\x68\x6f\x64':P(0xbe),'\x68\x65\x61\x64\x65\x72\x73':{'\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65':P(0xaa),'\x78\x2d\x6f\x72\x69\x67\x69\x6e\x2d\x73\x65\x63\x72\x65\x74':ORIGIN_SECRET},'\x62\x6f\x64\x79':JSON[P(0xc3)](s)});if(!k['\x6f\x6b'])throw new Error('\x53\x65\x72\x76\x65\x72\x20\x65\x72\x72\x6f\x72\x20'+k[P(0x99)]);return await k[P(0xb5)]();}catch(n){return console[P(0xc4)](P(0xb4),n),showModal(P(0xc8)),{'\x6f\x6b':![]};}}async function apiDelete(s){const D=C;try{const k=await fetch(API_URL,{'\x6d\x65\x74\x68\x6f\x64':D(0xe6),'\x68\x65\x61\x64\x65\x72\x73':{'\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65':D(0xaa),'\x78\x2d\x6f\x72\x69\x67\x69\x6e\x2d\x73\x65\x63\x72\x65\x74':ORIGIN_SECRET},'\x62\x6f\x64\x79':JSON['\x73\x74\x72\x69\x6e\x67\x69\x66\x79'](s)});if(!k['\x6f\x6b'])throw new Error(D(0xce)+k['\x73\x74\x61\x74\x75\x73']);return await k[D(0xb5)]();}catch(n){return console['\x65\x72\x72\x6f\x72'](D(0xa8),n),showModal(D(0xb3)),{'\x6f\x6b':![]};}}function renderConfession(s){const X=C,k=s['\x64\x61\x74\x61'],n=s['\x69\x64'],F=lsHas(X(0xdd),n),K=k[X(0xe7)]===currentUserId,L=document[X(0xc2)](X(0x97));L[X(0xca)]='\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x2d\x62\x6f\x78',L[X(0xae)]['\x70\x6f\x73\x69\x74\x69\x6f\x6e']=X(0xa9),L[X(0x95)]=X(0xa5)+k[X(0xd0)]+X(0xc6)+new Date(k[X(0x94)])[X(0xcb)]()+X(0xbf)+n+'\x27\x29\x22\x3e'+(F?'\u2764\ufe0f':'\ud83e\udd0d')+'\x20'+(k[X(0xc9)]||0x0)+'\x3c\x2f\x62\x75\x74\x74\x6f\x6e\x3e\x0a\x20\x20\x20\x20\x20\x20'+(K?X(0x9d)+n+'\x27\x29\x22\x3e\ud83d\uddd1\ufe0f\x20\x44\x65\x6c\x65\x74\x65\x3c\x2f\x62\x75\x74\x74\x6f\x6e\x3e':'\x3c\x62\x75\x74\x74\x6f\x6e\x20\x6f\x6e\x63\x6c\x69\x63\x6b\x3d\x22\x65\x76\x65\x6e\x74\x2e\x73\x74\x6f\x70\x50\x72\x6f\x70\x61\x67\x61\x74\x69\x6f\x6e\x28\x29\x3b\x20\x72\x65\x70\x6f\x72\x74\x50\x6f\x73\x74\x28\x27'+n+'\x27\x29\x22\x3e\ud83d\udea9\x20\x52\x65\x70\x6f\x72\x74\x3c\x2f\x62\x75\x74\x74\x6f\x6e\x3e')+'\x0a\x20\x20\x20\x20\x3c\x2f\x64\x69\x76\x3e\x0a\x20\x20',feed[X(0xaf)](L);}async function fetchFeed(){const u=C,s=await apiGet();feed[u(0x95)]='',s['\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x73']&&(s[u(0xc0)][u(0xed)]((k,n)=>n[u(0xcc)][u(0x94)]-k[u(0xcc)][u(0x94)]),s['\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x73'][u(0xd5)](renderConfession));}async function likePost(s){const T=C,k=lsHas(T(0xdd),s),n=await apiPatch({'\x69\x64':s,'\x75\x73\x65\x72\x49\x64':currentUserId,'\x61\x63\x74\x69\x6f\x6e':k?'\x75\x6e\x6c\x69\x6b\x65':T(0xd6)});if(n['\x6f\x6b']){if(k)removeFromLSArray('\x6c\x69\x6b\x65\x64\x50\x6f\x73\x74\x73',s);else addToLSArray(T(0xdd),s);fetchFeed();}}async function deletePost(s){if(!confirm('\x44\x65\x6c\x65\x74\x65\x20\x79\x6f\x75\x72\x20\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x3f\x20\x54\x68\x69\x73\x20\x63\x61\x6e\x27\x74\x20\x62\x65\x20\x75\x6e\x64\x6f\x6e\x65\x2e'))return;const k=await apiDelete({'\x69\x64':s,'\x75\x73\x65\x72\x49\x64':currentUserId});if(k['\x6f\x6b'])fetchFeed();}async function reportPost(s){const m=C;if(!confirm(m(0xdc)))return;const k=await apiPatch({'\x69\x64':s,'\x61\x63\x74\x69\x6f\x6e':'\x72\x65\x70\x6f\x72\x74'});if(k['\x6f\x6b'])showModal(m(0xd4));}function Q(s,k){const n=v();return Q=function(F,K){F=F-0x90;let L=n[F];return L;},Q(s,k);}const COOLDOWN_KEY=C(0xe5),COOLDOWN_DURATION=0x3c*0x3e8;let cooldownInterval;function startCooldown(){const H=C,s=Date[H(0xc1)]()+COOLDOWN_DURATION;localStorage[H(0xea)](COOLDOWN_KEY,s['\x74\x6f\x53\x74\x72\x69\x6e\x67']()),updateCooldown(),cooldownInterval=setInterval(updateCooldown,0x3e8);}function updateCooldown(){const J=C,s=parseInt(localStorage[J(0xa2)](COOLDOWN_KEY),0xa),k=Date[J(0xc1)]();if(!s||k>=s){sendBtn[J(0xb2)]=J(0x98),sendBtn[J(0x9a)]=input[J(0x96)][J(0xd7)]()[J(0xb1)]===0x0,localStorage['\x72\x65\x6d\x6f\x76\x65\x49\x74\x65\x6d'](COOLDOWN_KEY),clearInterval(cooldownInterval);return;}const n=Math[J(0xa3)]((s-k)/0x3e8);sendBtn[J(0xb2)]='\x57\x61\x69\x74\x20'+n+'\x73',sendBtn[J(0x9a)]=!![];}window[C(0xcd)]('\x6c\x6f\x61\x64',()=>{const N=C;localStorage['\x67\x65\x74\x49\x74\x65\x6d'](COOLDOWN_KEY)?(updateCooldown(),cooldownInterval=setInterval(updateCooldown,0x3e8)):(sendBtn[N(0xb2)]='\x53\x65\x6e\x64',sendBtn[N(0x9a)]=input[N(0x96)]['\x74\x72\x69\x6d']()[N(0xb1)]===0x0);});async function sendConfession(){const b=C,s=input[b(0x96)][b(0xd7)]();if(!s)return;const k=parseInt(localStorage['\x67\x65\x74\x49\x74\x65\x6d'](COOLDOWN_KEY),0xa);if(k&&Date['\x6e\x6f\x77']()<k){const n=Math[b(0xa3)]((k-Date[b(0xc1)]())/0x3e8);return showModal(b(0xd9)+n+b(0x9f));}sendBtn[b(0x9a)]=!![],showModal('\u23f3\x20\x41\x49\x20\x63\x68\x65\x63\x6b\x69\x6e\x67\x2e\x2e\x2e');try{const F=b(0xe2);let K={'\x76\x65\x72\x64\x69\x63\x74':b(0x9b)};try{const r=await fetch(F,{'\x6d\x65\x74\x68\x6f\x64':'\x50\x4f\x53\x54','\x68\x65\x61\x64\x65\x72\x73':{'\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65':'\x61\x70\x70\x6c\x69\x63\x61\x74\x69\x6f\x6e\x2f\x6a\x73\x6f\x6e'},'\x62\x6f\x64\x79':JSON[b(0xc3)]({'\x74\x65\x78\x74':s})});if(r['\x6f\x6b'])K=await r[b(0xb5)]();}catch(l){console['\x77\x61\x72\x6e'](b(0x9c));}if(K[b(0xb7)]==='\x42\x4c\x4f\x43\x4b'){showModal('\ud83d\uded1\x20\x54\x68\x69\x73\x20\x6d\x65\x73\x73\x61\x67\x65\x20\x69\x73\x6e\x27\x74\x20\x73\x61\x66\x65\x20\x74\x6f\x20\x70\x6f\x73\x74\x2e'),sendBtn[b(0x9a)]=![];return;}const L={'\x70\x6c\x61\x74\x66\x6f\x72\x6d':navigator[b(0xdb)],'\x75\x73\x65\x72\x41\x67\x65\x6e\x74':navigator[b(0xd8)],'\x6c\x61\x6e\x67\x75\x61\x67\x65':navigator[b(0xbc)]},f=await apiPost({'\x74\x65\x78\x74':s,'\x75\x73\x65\x72\x49\x64':currentUserId,'\x64\x65\x76\x69\x63\x65\x49\x6e\x66\x6f':L});if(f['\x6f\x6b'])input[b(0x96)]='',showModal(b(0xdf)),fetchFeed(),startCooldown();else showModal('\u26a0\ufe0f\x20\x46\x61\x69\x6c\x65\x64\x20\x74\x6f\x20\x70\x6f\x73\x74');}catch(Z){console['\x65\x72\x72\x6f\x72'](Z),showModal('\u26a0\ufe0f\x20\x53\x65\x72\x76\x65\x72\x20\x65\x72\x72\x6f\x72');}finally{sendBtn['\x64\x69\x73\x61\x62\x6c\x65\x64']=![];}}sendBtn[C(0xcd)](C(0xe4),sendConfession),input['\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72']('\x6b\x65\x79\x64\x6f\x77\x6e',s=>{const y=C;s[y(0xad)]===y(0xa0)&&!s['\x73\x68\x69\x66\x74\x4b\x65\x79']&&(s[y(0xde)](),sendConfession());}),fetchFeed(),window[C(0xbd)]=likePost,window[C(0xb9)]=deletePost,window[C(0x91)]=reportPost,window[C(0xa6)]=sendConfession;
+// ------------------- DOM ELEMENTS -------------------
+const feed = document.getElementById('confessionFeed');
+const input = document.getElementById('confessionInput');
+const sendBtn = document.getElementById('sendBtn');
+
+// ------------------- LOCALSTORAGE HELPERS -------------------
+function setLS(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+function getLS(key) { const val = localStorage.getItem(key); return val ? JSON.parse(val) : null; }
+function addToLSArray(key, value) { let arr = getLS(key) || []; if (!arr.includes(value)) { arr.push(value); setLS(key, arr); } }
+function removeFromLSArray(key, value) { let arr = getLS(key) || []; arr = arr.filter(item => item !== value); setLS(key, arr); }
+function lsHas(key, value) { let arr = getLS(key) || []; return arr.includes(value); }
+
+// ------------------- USER ID -------------------
+function getOrCreateUserId() {
+  let userId = localStorage.getItem('userId');
+  if (!userId) {
+    userId = crypto.randomUUID();
+    localStorage.setItem('userId', userId);
+  }
+  return userId;
+}
+const currentUserId = getOrCreateUserId();
+
+// ------------------- MODAL -------------------
+function showModal(message) {
+  const modal = document.getElementById('modal');
+  const modalMessage = document.getElementById('modalMessage');
+  if (!modal || !modalMessage) return;
+  modalMessage.textContent = message;
+  modal.style.display = 'block';
+  clearTimeout(showModal.hideTimeout);
+  showModal.hideTimeout = setTimeout(() => { modal.style.display = 'none'; }, 5500);
+}
+
+// ------------------- API HELPERS -------------------
+// The API URL is now your Netlify Function endpoint
+const API_URL = "/.netlify/functions/confess";
+// The secret is removed from here
+// const ORIGIN_SECRET = "f1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abcdef";
+
+async function apiGet() {
+  try {
+    // The secret is no longer included in the header on the front end
+    const res = await fetch(API_URL);
+    if (!res.ok) throw new Error(`Server error ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("API GET error:", err);
+    showModal("⚠️ Could not load feed");
+    return { confessions: [] };
+  }
+}
+
+async function apiPost(body) {
+  try {
+    // The secret is no longer included in the header on the front end
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error(`Server error ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("API POST error:", err);
+    showModal("⚠️ Could not send confession");
+    return { ok: false };
+  }
+}
+
+async function apiPatch(body) {
+  try {
+    // The secret is no longer included in the header on the front end
+    const res = await fetch(API_URL, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error(`Server error ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("API PATCH error:", err);
+    showModal("⚠️ Could not update post");
+    return { ok: false };
+  }
+}
+
+async function apiDelete(body) {
+  try {
+    // The secret is no longer included in the header on the front end
+    const res = await fetch(API_URL, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error(`Server error ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.error("API DELETE error:", err);
+    showModal("⚠️ Could not delete post");
+    return { ok: false };
+  }
+}
+
+// ------------------- RENDER CONFESSIONS -------------------
+function renderConfession(doc) {
+  const data = doc.data;
+  const docId = doc.id;
+  const liked = lsHas('likedPosts', docId);
+  const isMine = data.userId === currentUserId;
+
+  const card = document.createElement('div');
+  card.className = 'confession-box';
+  card.style.position = 'relative';
+  card.innerHTML = `
+    <div class="confession-text">${data.text}</div>
+    <div class="like-reply-bar">
+      <button onclick="event.stopPropagation(); likePost('${docId}')">${liked ? '❤️' : '🤍'} ${data.likes || 0}</button>
+      ${isMine
+        ? `<button onclick="event.stopPropagation(); deletePost('${docId}')">🗑️ Delete</button>`
+        : `<button onclick="event.stopPropagation(); reportPost('${docId}')">🚩 Report</button>`}
+    </div>
+  `;
+  feed.appendChild(card);
+}
+
+// ------------------- FEED -------------------
+async function fetchFeed() {
+  const data = await apiGet();
+  feed.innerHTML = '';
+  if (data.confessions) {
+    data.confessions.sort((a,b) => b.data.createdAt - a.data.createdAt);
+    data.confessions.forEach(renderConfession);
+  }
+}
+
+// ------------------- LIKE -------------------
+async function likePost(id) {
+  const liked = lsHas('likedPosts', id);
+  const res = await apiPatch({ id, userId: currentUserId, action: liked ? "unlike" : "like" });
+  if (res.ok) {
+    if (liked) removeFromLSArray('likedPosts', id);
+    else addToLSArray('likedPosts', id);
+    fetchFeed();
+  }
+}
+
+// ------------------- DELETE -------------------
+async function deletePost(id) {
+  if (!confirm("Delete your confession? This can't be undone.")) return;
+  const res = await apiDelete({ id, userId: currentUserId });
+  if (res.ok) fetchFeed();
+}
+
+// ------------------- REPORT -------------------
+async function reportPost(id) {
+  if (!confirm("Report this confession?")) return;
+  const res = await apiPatch({ id, action: "report" });
+  if (res.ok) showModal("✅ Reported successfully");
+}
+
+// ------------------- COOLDOWN -------------------
+const COOLDOWN_KEY = "sendCooldownEnd";
+const COOLDOWN_DURATION = 60 * 1000; // 60s
+let cooldownInterval;
+
+function startCooldown() {
+  const endTime = Date.now() + COOLDOWN_DURATION;
+  localStorage.setItem(COOLDOWN_KEY, endTime.toString());
+  updateCooldown();
+  cooldownInterval = setInterval(updateCooldown, 1000);
+}
+
+function updateCooldown() {
+  const endTime = parseInt(localStorage.getItem(COOLDOWN_KEY), 10);
+  const now = Date.now();
+
+  if (!endTime || now >= endTime) {
+    sendBtn.textContent = "Send";
+    sendBtn.disabled = input.value.trim().length === 0;
+    localStorage.removeItem(COOLDOWN_KEY);
+    clearInterval(cooldownInterval);
+    return;
+  }
+
+  const secondsLeft = Math.ceil((endTime - now) / 1000);
+  sendBtn.textContent = `Wait ${secondsLeft}s`;
+  sendBtn.disabled = true;
+}
+
+// Resume cooldown on page load
+window.addEventListener("load", () => {
+  if (localStorage.getItem(COOLDOWN_KEY)) {
+    updateCooldown();
+    cooldownInterval = setInterval(updateCooldown, 1000);
+  } else {
+    sendBtn.textContent = "Send";
+    sendBtn.disabled = input.value.trim().length === 0;
+  }
+});
+
+// ------------------- SEND CONFESSION -------------------
+async function sendConfession() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  const endTime = parseInt(localStorage.getItem(COOLDOWN_KEY), 10);
+  if (endTime && Date.now() < endTime) {
+    const secondsLeft = Math.ceil((endTime - Date.now()) / 1000);
+    return showModal(`⏳ Please wait ${secondsLeft}s before sending again`);
+  }
+
+  sendBtn.disabled = true;
+  showModal("⏳ AI checking...");
+
+  try {
+    // --- moderation ---
+    const MODERATION_API_URL = "https://twelve-ai.vercel.app/api/moderate";
+    let modData = { verdict: "ALLOW" };
+    try {
+      const modRes = await fetch(MODERATION_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+      if (modRes.ok) modData = await modRes.json();
+    } catch(e){ console.warn("Moderation skipped"); }
+
+    if (modData.verdict === "BLOCK") {
+      showModal("🛑 This message isn't safe to post.");
+      sendBtn.disabled = false;
+      return;
+    }
+
+    // --- post confession ---
+    const deviceInfo = {
+      platform: navigator.platform,
+      userAgent: navigator.userAgent,
+      language: navigator.language
+    };
+    const res = await apiPost({ text, userId: currentUserId, deviceInfo });
+    if (res.ok) {
+      input.value = '';
+      showModal("✅ Posted!");
+      fetchFeed();
+      startCooldown();
+    } else showModal("⚠️ Failed to post");
+
+  } catch (e) {
+    console.error(e);
+    showModal("⚠️ Server error");
+  } finally {
+    sendBtn.disabled = false;
+  }
+}
+
+// ------------------- EVENT LISTENERS -------------------
+sendBtn.addEventListener('click', sendConfession);
+input.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendConfession();
+  }
+});
+
+// ------------------- INITIAL LOAD -------------------
+fetchFeed();
+
+// Make functions global for inline onclick in buttons
+window.likePost = likePost;
+window.deletePost = deletePost;
+window.reportPost = reportPost;
+window.sendConfession = sendConfession;
