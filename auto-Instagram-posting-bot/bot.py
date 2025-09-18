@@ -82,7 +82,7 @@ MAX_FONT_SIZE = 60
 MIN_FONT_SIZE = 18
 
 # CSS-like margin (top, right, bottom, left)
-MARGIN = {"top": 140, "right": 80, "bottom": 140, "left": 80}
+MARGIN = {"top": 140, "right": 5, "bottom": 140, "left": 5}
 
 # --------------------------
 # Emoji helpers
