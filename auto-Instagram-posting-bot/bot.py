@@ -168,13 +168,13 @@ def generate_card(confession_text: str, output_name: str):
                     x += font_size
                 else:
                     w, _ = measure_text_size(font, char)
-                    draw.text((x, y), char, font=font, fill=(255, 255, 255))
-                    draw.text((x + 1, y), char, font=font, fill=(255, 255, 255))
+                    draw.text((x, y), char, font=font, fill=(255, 221, 206))
+                    draw.text((x + 1, y), char, font=font, fill=(255, 221, 206))
                     x += w
             else:
                 w, _ = measure_text_size(font, char)
-                draw.text((x, y), char, font=font, fill=(255, 255, 255))
-                draw.text((x + 1, y), char, font=font, fill=(255, 255, 255))
+                draw.text((x, y), char, font=font, fill=(255, 221, 206))
+                draw.text((x + 1, y), char, font=font, fill=(255, 221, 206))
                 x += w
 
         y += font_size + LINE_SPACING
