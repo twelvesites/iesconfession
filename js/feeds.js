@@ -1,1 +1,353 @@
-const A=O;function O(D,a){const w=N();return O=function(d,o){d=d-0x195;let g=w[d];return g;},O(D,a);}(function(D,a){const v=O,w=D();while(!![]){try{const d=parseInt(v(0x1cb))/0x1+parseInt(v(0x1d5))/0x2*(-parseInt(v(0x1c3))/0x3)+-parseInt(v(0x1b9))/0x4*(parseInt(v(0x1d6))/0x5)+-parseInt(v(0x1b8))/0x6*(parseInt(v(0x1c4))/0x7)+parseInt(v(0x1ab))/0x8+-parseInt(v(0x1d7))/0x9+parseInt(v(0x1d1))/0xa;if(d===a)break;else w['push'](w['shift']());}catch(o){w['push'](w['shift']());}}}(N,0x725f0));const feed=document[A(0x1cc)](A(0x1b5)),input=document[A(0x1cc)]('\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x49\x6e\x70\x75\x74'),sendBtn=document[A(0x1cc)](A(0x1be));function setLS(D,a){const E=A;localStorage['\x73\x65\x74\x49\x74\x65\x6d'](D,JSON[E(0x1eb)](a));}function getLS(D){const C=A,a=localStorage[C(0x1b6)](D);return a?JSON['\x70\x61\x72\x73\x65'](a):null;}function addToLSArray(D,a){const r=A;let w=getLS(D)||[];!w[r(0x19a)](a)&&(w['\x70\x75\x73\x68'](a),setLS(D,w));}function removeFromLSArray(D,a){const U=A;let w=getLS(D)||[];w=w[U(0x19f)](d=>d!==a),setLS(D,w);}function lsHas(D,a){let w=getLS(D)||[];return w['\x69\x6e\x63\x6c\x75\x64\x65\x73'](a);}function getOrCreateUserId(){const X=A;let D=localStorage[X(0x1b6)](X(0x1a0));return!D&&(D=crypto['\x72\x61\x6e\x64\x6f\x6d\x55\x55\x49\x44'](),localStorage[X(0x1b0)](X(0x1a0),D)),D;}const currentUserId=getOrCreateUserId();function showModal(D){const L=A,a=document['\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64'](L(0x1df)),w=document[L(0x1cc)]('\x6d\x6f\x64\x61\x6c\x4d\x65\x73\x73\x61\x67\x65');if(!a||!w)return;w['\x74\x65\x78\x74\x43\x6f\x6e\x74\x65\x6e\x74']=D,a[L(0x1e2)]['\x64\x69\x73\x70\x6c\x61\x79']=L(0x1a4),clearTimeout(showModal['\x68\x69\x64\x65\x54\x69\x6d\x65\x6f\x75\x74']),showModal['\x68\x69\x64\x65\x54\x69\x6d\x65\x6f\x75\x74']=setTimeout(()=>{const p=L;a[p(0x1e2)][p(0x1d8)]='\x6e\x6f\x6e\x65';},0x157c);}function N(){const e=['\x73\x65\x6e\x64\x42\x74\x6e','\x72\x65\x70\x6f\x72\x74','\x20\x65\x72\x72\x6f\x72\x3a','\x45\x6e\x74\x65\x72','\x69\x6e\x70\x75\x74','\x33\x42\x55\x75\x44\x4a\x67','\x38\x33\x39\x30\x39\x79\x4d\x77\x54\x52\x65','\u26a0\ufe0f\x20\x46\x61\x69\x6c\x65\x64\x20\x74\x6f\x20\x70\x6f\x73\x74','\x73\x65\x6e\x64\x43\x6f\x6f\x6c\x64\x6f\x77\x6e\x45\x6e\x64','\x0a\x20\x20\x20\x20\x3c\x2f\x64\x69\x76\x3e\x0a\x20\x20','\x50\x41\x54\x43\x48','\x3c\x2f\x64\x69\x76\x3e\x0a\x20\x20\x20\x20\x3c\x64\x69\x76\x20\x63\x6c\x61\x73\x73\x3d\x22\x6c\x69\x6b\x65\x2d\x72\x65\x70\x6c\x79\x2d\x62\x61\x72\x22\x3e\x0a\x20\x20\x20\x20\x20\x20\x3c\x62\x75\x74\x74\x6f\x6e\x20\x6f\x6e\x63\x6c\x69\x63\x6b\x3d\x22\x65\x76\x65\x6e\x74\x2e\x73\x74\x6f\x70\x50\x72\x6f\x70\x61\x67\x61\x74\x69\x6f\x6e\x28\x29\x3b\x20\x6c\x69\x6b\x65\x50\x6f\x73\x74\x28\x27','\x6c\x69\x6b\x65','\x32\x38\x34\x31\x35\x37\x74\x43\x46\x53\x47\x43','\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64','\x42\x4c\x4f\x43\x4b','\x61\x70\x70\x6c\x69\x63\x61\x74\x69\x6f\x6e\x2f\x6a\x73\x6f\x6e','\x64\x69\x73\x61\x62\x6c\x65\x64','\x27\x29\x22\x3e','\x34\x39\x33\x33\x33\x35\x30\x46\x46\x61\x51\x5a\x79','\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x73','\u2705\x20\x52\x65\x70\x6f\x72\x74\x65\x64\x20\x73\x75\x63\x63\x65\x73\x73\x66\x75\x6c\x6c\x79','\x76\x61\x6c\x75\x65','\x39\x30\x36\x39\x30\x32\x6b\x55\x58\x48\x44\x4f','\x33\x35\x76\x53\x76\x72\x6c\x50','\x32\x39\x38\x37\x39\x37\x33\x5a\x72\x75\x6d\x55\x4f','\x64\x69\x73\x70\x6c\x61\x79','\x41\x50\x49\x20','\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72','\x20\x66\x61\x69\x6c\x65\x64','\x63\x72\x65\x61\x74\x65\x64\x41\x74','\x65\x72\x72\x6f\x72','\x3c\x62\x75\x74\x74\x6f\x6e\x20\x6f\x6e\x63\x6c\x69\x63\x6b\x3d\x22\x65\x76\x65\x6e\x74\x2e\x73\x74\x6f\x70\x50\x72\x6f\x70\x61\x67\x61\x74\x69\x6f\x6e\x28\x29\x3b\x20\x64\x65\x6c\x65\x74\x65\x50\x6f\x73\x74\x28\x27','\x6d\x6f\x64\x61\x6c','\x0a\x20\x20\x20\x20\x3c\x64\x69\x76\x20\x63\x6c\x61\x73\x73\x3d\x22\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x2d\x74\x65\x78\x74\x22\x3e','\x75\x6e\x6c\x69\x6b\x65','\x73\x74\x79\x6c\x65','\x63\x6c\x69\x63\x6b','\x74\x65\x78\x74\x43\x6f\x6e\x74\x65\x6e\x74','\x6c\x69\x6b\x65\x73','\x44\x65\x6c\x65\x74\x65\x20\x79\x6f\x75\x72\x20\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x3f\x20\x54\x68\x69\x73\x20\x63\x61\x6e\x27\x74\x20\x62\x65\x20\x75\x6e\x64\x6f\x6e\x65\x2e','\x74\x6f\x53\x74\x72\x69\x6e\x67','\x61\x70\x70\x65\x6e\x64\x43\x68\x69\x6c\x64','\u26a0\ufe0f\x20\x53\x65\x72\x76\x65\x72\x20\x65\x72\x72\x6f\x72','\x73\x20\x62\x65\x66\x6f\x72\x65\x20\x73\x65\x6e\x64\x69\x6e\x67\x20\x61\x67\x61\x69\x6e','\x73\x74\x72\x69\x6e\x67\x69\x66\x79','\x6c\x6f\x61\x64','\x70\x6c\x61\x74\x66\x6f\x72\x6d','\x27\x29\x22\x3e\ud83d\uddd1\ufe0f\x20\x44\x65\x6c\x65\x74\x65\x3c\x2f\x62\x75\x74\x74\x6f\x6e\x3e','\x73\x74\x61\x74\x75\x73','\x70\x72\x65\x76\x65\x6e\x74\x44\x65\x66\x61\x75\x6c\x74','\x76\x65\x72\x64\x69\x63\x74','\x57\x61\x69\x74\x20','\x69\x6e\x63\x6c\x75\x64\x65\x73','\x75\x73\x65\x72\x41\x67\x65\x6e\x74','\x44\x45\x4c\x45\x54\x45','\x47\x45\x54','\x74\x72\x69\x6d','\x66\x69\x6c\x74\x65\x72','\x75\x73\x65\x72\x49\x64','\u23f3\x20\x41\x49\x20\x63\x68\x65\x63\x6b\x69\x6e\x67\x2e\x2e\x2e','\x6c\x69\x6b\x65\x64\x50\x6f\x73\x74\x73','\x70\x6f\x73\x69\x74\x69\x6f\x6e','\x62\x6c\x6f\x63\x6b','\u2705\x20\x50\x6f\x73\x74\x65\x64\x21','\x64\x69\x76','\x6a\x73\x6f\x6e','\x6b\x65\x79','\x72\x65\x6d\x6f\x76\x65\x49\x74\x65\x6d','\ud83d\uded1\x20\x54\x68\x69\x73\x20\x6d\x65\x73\x73\x61\x67\x65\x20\x69\x73\x6e\x27\x74\x20\x73\x61\x66\x65\x20\x74\x6f\x20\x70\x6f\x73\x74\x2e','\x35\x35\x39\x32\x32\x39\x36\x50\x61\x53\x7a\x62\x47','\x50\x4f\x53\x54','\x6e\x6f\x77','\x63\x65\x69\x6c','\x73\x6f\x72\x74','\x73\x65\x74\x49\x74\x65\x6d','\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x2d\x62\x6f\x78','\x41\x4c\x4c\x4f\x57','\x53\x65\x6e\x64','\x64\x65\x6c\x65\x74\x65\x50\x6f\x73\x74','\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x46\x65\x65\x64','\x67\x65\x74\x49\x74\x65\x6d','\x3c\x62\x75\x74\x74\x6f\x6e\x20\x6f\x6e\x63\x6c\x69\x63\x6b\x3d\x22\x65\x76\x65\x6e\x74\x2e\x73\x74\x6f\x70\x50\x72\x6f\x70\x61\x67\x61\x74\x69\x6f\x6e\x28\x29\x3b\x20\x72\x65\x70\x6f\x72\x74\x50\x6f\x73\x74\x28\x27','\x34\x38\x42\x46\x4e\x75\x58\x49','\x37\x32\x34\x31\x32\x64\x56\x75\x6d\x67\x44','\x3c\x2f\x62\x75\x74\x74\x6f\x6e\x3e\x0a\x20\x20\x20\x20\x20\x20','\x63\x6c\x61\x73\x73\x4e\x61\x6d\x65','\x53\x65\x72\x76\x65\x72\x20\x65\x72\x72\x6f\x72\x20','\x4d\x6f\x64\x65\x72\x61\x74\x69\x6f\x6e\x20\x73\x6b\x69\x70\x70\x65\x64'];N=function(){return e;};return N();}const API_URL='\x68\x74\x74\x70\x73\x3a\x2f\x2f\x69\x65\x73\x74\x65\x61\x2d\x62\x61\x63\x6b\x65\x6e\x64\x2e\x76\x65\x72\x63\x65\x6c\x2e\x61\x70\x70\x2f\x61\x70\x69\x2f\x63\x6f\x6e\x66\x65\x73\x73',ORIGIN_SECRET='\x66\x31\x62\x32\x63\x33\x64\x34\x65\x35\x66\x36\x37\x38\x39\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x61\x62\x63\x64\x65\x66\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x61\x62\x63\x64\x65\x66\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x61\x62\x63\x64\x65\x66';async function apiFetch(D='\x47\x45\x54',a){const R=A,w={'\x6d\x65\x74\x68\x6f\x64':D,'\x68\x65\x61\x64\x65\x72\x73':{'\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65':R(0x1ce),'\x78\x2d\x6f\x72\x69\x67\x69\x6e\x2d\x73\x65\x63\x72\x65\x74':ORIGIN_SECRET}};if(a)w['\x62\x6f\x64\x79']=JSON[R(0x1eb)](a);try{const d=await fetch(API_URL,w);if(!d['\x6f\x6b'])throw new Error(R(0x1bc)+d[R(0x196)]);return await d['\x6a\x73\x6f\x6e']();}catch(o){return console[R(0x1dd)](R(0x1d9)+D+R(0x1c0),o),showModal('\u26a0\ufe0f\x20'+D+R(0x1db)),D===R(0x19d)?{'\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x73':[]}:{'\x6f\x6b':![]};}}const apiGet=()=>apiFetch('\x47\x45\x54'),apiPost=D=>apiFetch(A(0x1ac),D),apiPatch=D=>apiFetch(A(0x1c8),D),apiDelete=D=>apiFetch(A(0x19c),D);function renderConfession(D){const V=A,a=D['\x64\x61\x74\x61'],w=D['\x69\x64'],d=lsHas('\x6c\x69\x6b\x65\x64\x50\x6f\x73\x74\x73',w),o=a[V(0x1a0)]===currentUserId,g=document['\x63\x72\x65\x61\x74\x65\x45\x6c\x65\x6d\x65\x6e\x74'](V(0x1a6));g[V(0x1bb)]=V(0x1b1),g[V(0x1e2)][V(0x1a3)]='\x72\x65\x6c\x61\x74\x69\x76\x65',g['\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c']=V(0x1e0)+a['\x74\x65\x78\x74']+V(0x1c9)+w+V(0x1d0)+(d?'\u2764\ufe0f':'\ud83e\udd0d')+'\x20'+(a[V(0x1e5)]||0x0)+V(0x1ba)+(o?V(0x1de)+w+V(0x195):V(0x1b7)+w+'\x27\x29\x22\x3e\ud83d\udea9\x20\x52\x65\x70\x6f\x72\x74\x3c\x2f\x62\x75\x74\x74\x6f\x6e\x3e')+V(0x1c7),feed[V(0x1e8)](g);}async function fetchFeed(){const q=A,D=await apiGet();feed['\x69\x6e\x6e\x65\x72\x48\x54\x4d\x4c']='',D[q(0x1d2)]&&(D[q(0x1d2)][q(0x1af)]((w,d)=>d['\x64\x61\x74\x61'][q(0x1dc)]-w['\x64\x61\x74\x61'][q(0x1dc)]),D['\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x73']['\x66\x6f\x72\x45\x61\x63\x68'](renderConfession));}async function likePost(D){const k=A,a=lsHas('\x6c\x69\x6b\x65\x64\x50\x6f\x73\x74\x73',D),w=await apiPatch({'\x69\x64':D,'\x75\x73\x65\x72\x49\x64':currentUserId,'\x61\x63\x74\x69\x6f\x6e':a?k(0x1e1):k(0x1ca)});w['\x6f\x6b']&&(a?removeFromLSArray(k(0x1a2),D):addToLSArray(k(0x1a2),D),fetchFeed());}async function deletePost(D){const s=A;if(!confirm(s(0x1e6)))return;const a=await apiDelete({'\x69\x64':D,'\x75\x73\x65\x72\x49\x64':currentUserId});if(a['\x6f\x6b'])fetchFeed();}async function reportPost(D){const t=A;if(!confirm('\x52\x65\x70\x6f\x72\x74\x20\x74\x68\x69\x73\x20\x63\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e\x3f'))return;const a=await apiPatch({'\x69\x64':D,'\x61\x63\x74\x69\x6f\x6e':t(0x1bf)});if(a['\x6f\x6b'])showModal(t(0x1d3));}const COOLDOWN_KEY=A(0x1c6),COOLDOWN_DURATION=0x3c*0x3e8;let cooldownInterval;function refreshSendBtn(){const Z=A,D=input[Z(0x1d4)][Z(0x19e)](),a=parseInt(localStorage[Z(0x1b6)](COOLDOWN_KEY),0xa),w=a&&Date[Z(0x1ad)]()<a;sendBtn[Z(0x1cf)]=!D||w;}function startCooldown(){const m=A,D=Date[m(0x1ad)]()+COOLDOWN_DURATION;localStorage[m(0x1b0)](COOLDOWN_KEY,D[m(0x1e7)]()),updateCooldown(),cooldownInterval=setInterval(updateCooldown,0x3e8);}function updateCooldown(){const f=A,D=parseInt(localStorage['\x67\x65\x74\x49\x74\x65\x6d'](COOLDOWN_KEY),0xa),a=Date[f(0x1ad)]();if(!D||a>=D){clearInterval(cooldownInterval),sendBtn[f(0x1e4)]=f(0x1b3),refreshSendBtn(),localStorage[f(0x1a9)](COOLDOWN_KEY);return;}const w=Math['\x63\x65\x69\x6c']((D-a)/0x3e8);sendBtn[f(0x1e4)]=f(0x199)+w+'\x73',sendBtn['\x64\x69\x73\x61\x62\x6c\x65\x64']=!![];}async function sendConfession(){const y=A,D=input[y(0x1d4)]['\x74\x72\x69\x6d']();if(!D)return;const a=parseInt(localStorage[y(0x1b6)](COOLDOWN_KEY),0xa);if(a&&Date[y(0x1ad)]()<a){const w=Math[y(0x1ae)]((a-Date[y(0x1ad)]())/0x3e8);return showModal('\u23f3\x20\x50\x6c\x65\x61\x73\x65\x20\x77\x61\x69\x74\x20'+w+y(0x1ea));}sendBtn[y(0x1cf)]=!![],showModal(y(0x1a1));try{const d='\x68\x74\x74\x70\x73\x3a\x2f\x2f\x74\x77\x65\x6c\x76\x65\x2d\x61\x69\x2e\x76\x65\x72\x63\x65\x6c\x2e\x61\x70\x70\x2f\x61\x70\x69\x2f\x6d\x6f\x64\x65\x72\x61\x74\x65';let o={'\x76\x65\x72\x64\x69\x63\x74':y(0x1b2)};try{const z=await fetch(d,{'\x6d\x65\x74\x68\x6f\x64':y(0x1ac),'\x68\x65\x61\x64\x65\x72\x73':{'\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65':'\x61\x70\x70\x6c\x69\x63\x61\x74\x69\x6f\x6e\x2f\x6a\x73\x6f\x6e'},'\x62\x6f\x64\x79':JSON[y(0x1eb)]({'\x74\x65\x78\x74':D})});if(z['\x6f\x6b'])o=await z[y(0x1a7)]();}catch(i){console['\x77\x61\x72\x6e'](y(0x1bd));}if(o[y(0x198)]===y(0x1cd)){showModal(y(0x1aa)),refreshSendBtn();return;}const g={'\x70\x6c\x61\x74\x66\x6f\x72\x6d':navigator[y(0x1ed)],'\x75\x73\x65\x72\x41\x67\x65\x6e\x74':navigator[y(0x19b)],'\x6c\x61\x6e\x67\x75\x61\x67\x65':navigator['\x6c\x61\x6e\x67\x75\x61\x67\x65']},b=await apiPost({'\x74\x65\x78\x74':D,'\x75\x73\x65\x72\x49\x64':currentUserId,'\x64\x65\x76\x69\x63\x65\x49\x6e\x66\x6f':g,'\x70\x6f\x73\x74\x65\x64':![]});b['\x6f\x6b']?(input['\x76\x61\x6c\x75\x65']='',showModal(y(0x1a5)),fetchFeed(),startCooldown()):showModal(y(0x1c5));}catch(G){console['\x65\x72\x72\x6f\x72'](G),showModal(y(0x1e9));}finally{refreshSendBtn();}}sendBtn[A(0x1da)](A(0x1e3),sendConfession),input[A(0x1da)]('\x6b\x65\x79\x64\x6f\x77\x6e',D=>{const J=A;D[J(0x1a8)]===J(0x1c1)&&!D['\x73\x68\x69\x66\x74\x4b\x65\x79']&&(D[J(0x197)](),sendConfession());}),input['\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72'](A(0x1c2),refreshSendBtn),window['\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72'](A(0x1ec),()=>{const B=A;localStorage[B(0x1b6)](COOLDOWN_KEY)?(updateCooldown(),cooldownInterval=setInterval(updateCooldown,0x3e8)):(sendBtn[B(0x1e4)]=B(0x1b3),refreshSendBtn());}),fetchFeed(),window['\x6c\x69\x6b\x65\x50\x6f\x73\x74']=likePost,window[A(0x1b4)]=deletePost,window['\x72\x65\x70\x6f\x72\x74\x50\x6f\x73\x74']=reportPost,window['\x73\x65\x6e\x64\x43\x6f\x6e\x66\x65\x73\x73\x69\x6f\x6e']=sendConfession;
+// ------------------- FIREBASE -------------------
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, getDocs,
+  doc, deleteDoc, updateDoc, query, orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app-check.js";
+
+// ------------------- FIREBASE CONFIG -------------------
+const firebaseConfig = {
+  apiKey: "AIzaSyC6-5zaMpXdnof9XOatdQvGB2oPMwbPnHQ",
+  authDomain: "iestea-app.firebaseapp.com",
+  projectId: "iestea-app",
+  storageBucket: "iestea-app.firebasestorage.app",
+  messagingSenderId: "1081881696843",
+  appId: "1:1081881696843:web:09afe29309ea5372f28bce",
+  measurementId: "G-26RGJDN6EV"
+};
+const app = initializeApp(firebaseConfig);
+
+// ------------------- APP CHECK -------------------
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LfRac8rAAAAANkfnEQe02zwvcZzdbM8y6Vsa8-J'),
+  isTokenAutoRefreshEnabled: true
+});
+
+// ------------------- AUTH -------------------
+const auth = getAuth(app);
+let currentUserId = null;
+signInAnonymously(auth)
+  .then(() => console.log("Signed in anonymously"))
+  .catch(err => console.error("Auth error:", err));
+
+onAuthStateChanged(auth, user => {
+  if(user) {
+    currentUserId = user.uid;
+    console.log("Auth ready:", currentUserId);
+  }
+});
+
+// ------------------- FIRESTORE -------------------
+const db = getFirestore(app);
+const confessionCol = collection(db, "confession");
+
+// ------------------- SUPABASE -------------------
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+const SUPABASE_URL = 'https://hvqjilehxoctkmygzwtw.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_hHfzJPmWvWyMPKAS7IcCGA_zW2xnBzW';
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ------------------- DOM ELEMENTS -------------------
+const feed = document.getElementById('confessionFeed');
+const input = document.getElementById('confessionInput');
+const sendBtn = document.getElementById('sendBtn');
+const openModalBtn = document.getElementById('openUploadModal');
+const uploadModal = document.getElementById('uploadModal');
+const closeModalBtn = document.getElementById('closeUploadModal');
+const modalFileInput = document.getElementById('modalFileInput');
+const modalUploadBtn = document.getElementById('modalUploadBtn');
+const previewContainer = document.getElementById('previewContainer');
+const imagePreview = document.getElementById('imagePreview');
+
+// ------------------- LOCALSTORAGE HELPERS -------------------
+function setLS(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+function getLS(key) { const val = localStorage.getItem(key); return val ? JSON.parse(val) : null; }
+function addToLSArray(key, value) { let arr = getLS(key) || []; if (!arr.includes(value)) { arr.push(value); setLS(key, arr); } }
+function removeFromLSArray(key, value) { let arr = getLS(key) || []; arr = arr.filter(i => i !== value); setLS(key, arr); }
+function lsHas(key, value) { return (getLS(key) || []).includes(value); }
+
+// ------------------- UTILS -------------------
+function showModal(message) {
+  const modal = document.getElementById('modal');
+  const modalMessage = document.getElementById('modalMessage');
+  if (!modal || !modalMessage) return;
+  modalMessage.textContent = message;
+  modal.style.display = 'block';
+  clearTimeout(showModal.hideTimeout);
+  showModal.hideTimeout = setTimeout(() => { modal.style.display = 'none'; }, 3500);
+}
+
+// ------------------- CONFESSIONS -------------------
+function renderConfession(docSnap) {
+  const data = docSnap.data();
+  const docId = docSnap.id;
+  const liked = lsHas('likedPosts', docId);
+  const isMine = data.userId === currentUserId;
+  const showImage = !!data.imageURL;
+  if (!data.text && !showImage) return;
+  if (showImage && data.status !== "approved" && !isMine) return;
+
+  const card = document.createElement('div');
+  card.className = 'confession-box';
+  let html = `<div class="confession-text">${data.text || ''}</div>`;
+if (showImage && (data.status === "approved" || isMine))
+  html += `<img src="${data.imageURL}" class="confession-image">`;
+html += `
+  <div class="like-reply-bar">
+    ${isMine
+      ? `<button onclick="event.stopPropagation(); deletePost('${docId}')">🗑️ Delete</button>`
+      : `<button onclick="event.stopPropagation(); reportPost('${docId}')">🚩 Report</button>`}
+  </div>`;
+
+  card.innerHTML = html;
+  feed.appendChild(card);
+}
+
+async function fetchFeed() {
+  const loader = document.getElementById('feedLoader');
+  feed.innerHTML = '';
+  if(loader) loader.style.display = 'flex';
+
+  try {
+    const q = query(confessionCol, orderBy("createdAt", "desc"));
+    const snapshot = await getDocs(q);
+    feed.innerHTML = '';
+    snapshot.forEach(renderConfession);
+  } catch (e) {
+    console.error(e);
+    showModal("⚠️ Failed to load feed");
+  } finally {
+    if(loader) loader.style.display = 'none';
+  }
+}
+
+// ------------------- POST / LIKE / DELETE / REPORT -------------------
+async function likePost(id) {
+  const liked = lsHas('likedPosts', id);
+  const docRef = doc(db, "confession", id);
+  const snap = await getDocs(docRef);
+  const likes = snap.data().likes || 0;
+  await updateDoc(docRef, { likes: liked ? likes - 1 : likes + 1 });
+  liked ? removeFromLSArray('likedPosts', id) : addToLSArray('likedPosts', id);
+  fetchFeed();
+}
+
+async function deletePost(id) {
+  if (!confirm("Delete your confession?")) return;
+  await deleteDoc(doc(db, "confession", id));
+  fetchFeed();
+}
+
+async function reportPost(id) {
+  if (!confirm("Report this confession?")) return;
+  await updateDoc(doc(db, "confession", id), { reported: true });
+  showModal("✅ Reported");
+}
+
+// ------------------- COOLDOWN -------------------
+const COOLDOWN_KEY = "sendCooldownEnd";
+const COOLDOWN_DURATION = 60000;
+let cooldownInterval;
+
+function refreshSendBtn() {
+  const text = input.value.trim();
+  const end = parseInt(localStorage.getItem(COOLDOWN_KEY), 10);
+  const inCd = end && Date.now() < end;
+  sendBtn.disabled = !text || inCd;
+}
+
+function updateCooldown() {
+  const end = parseInt(localStorage.getItem(COOLDOWN_KEY), 10);
+  const now = Date.now();
+  if (!end || now >= end) {
+    clearInterval(cooldownInterval);
+    sendBtn.textContent = "Send";
+    localStorage.removeItem(COOLDOWN_KEY);
+    refreshSendBtn();
+    return;
+  }
+  const sec = Math.ceil((end - now) / 1000);
+  sendBtn.textContent = `Wait ${sec}s`;
+}
+
+function startCooldown() {
+  const end = Date.now() + COOLDOWN_DURATION;
+  localStorage.setItem(COOLDOWN_KEY, end);
+  updateCooldown();
+  cooldownInterval = setInterval(updateCooldown, 1000);
+}
+
+// ------------------- SEND CONFESSION (with AI moderation) -------------------
+async function sendConfession() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  // cooldown check
+  const end = parseInt(localStorage.getItem(COOLDOWN_KEY), 10);
+  if (end && Date.now() < end) {
+    const sec = Math.ceil((end - Date.now()) / 1000);
+    return showModal(`⏳ Wait ${sec}s`);
+  }
+
+  sendBtn.disabled = true;
+  showModal("⏳ AI checking...");
+
+  try {
+    // 1️⃣ call moderation API
+    const MODERATION_API_URL = "https://twelve-ai.vercel.app/api/moderate";
+    let modData = { verdict: "ALLOW" };
+    try {
+      const modRes = await fetch(MODERATION_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+      if (modRes.ok) modData = await modRes.json();
+    } catch (e) {
+      console.warn("Moderation call failed, skipping:", e);
+    }
+
+    // 2️⃣ block if verdict is BLOCK
+    if (modData.verdict === "BLOCK") {
+      showModal("🛑 This message isn’t safe to post");
+      refreshSendBtn();
+      return;
+    }
+
+    // 3️⃣ post to Firestore
+    await addDoc(confessionCol, {
+      text,
+      userId: currentUserId,
+      likes: 0,
+      createdAt: Date.now(),
+      imageURL: '',
+      status: '',
+      posted: false,
+      replies: [],
+      reports: 0,
+      deviceInfo: {
+        platform: navigator.platform,
+        userAgent: navigator.userAgent,
+        language: navigator.language
+      }
+    });
+
+    input.value = '';
+    showModal("✅ Posted");
+    fetchFeed();
+    startCooldown();
+  } catch (e) {
+    console.error(e);
+    showModal("⚠️ Failed to post");
+  } finally {
+    refreshSendBtn();
+  }
+}
+
+
+// ------------------- IMAGE UPLOAD MODAL -------------------
+function resetUploadModal() {
+  modalFileInput.value = '';
+  previewContainer.style.display = 'none';
+  imagePreview.src = '';
+  modalUploadBtn.style.display = 'none';
+}
+
+openModalBtn.addEventListener('click', () => {
+  uploadModal.style.display = 'block';
+  resetUploadModal();
+});
+closeModalBtn.addEventListener('click', () => uploadModal.style.display = 'none');
+window.addEventListener('click', e => { if (e.target === uploadModal) uploadModal.style.display = 'none'; });
+
+// preview logic
+modalFileInput.addEventListener('change', () => {
+  const file = modalFileInput.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      imagePreview.src = e.target.result;
+      previewContainer.style.display = 'block';
+      modalUploadBtn.style.display = 'inline-block';
+    };
+    reader.readAsDataURL(file);
+  } else resetUploadModal();
+});
+
+// upload to supabase
+modalUploadBtn.addEventListener('click', async () => {
+  const file = modalFileInput.files[0];
+  if (!file) return showModal("⚠️ Select an image");
+  modalUploadBtn.textContent = "Uploading...";
+  modalUploadBtn.disabled = true;
+
+  const fileName = `${Date.now()}_${file.name}`;
+  const path = `images/${fileName}`;
+  const { error } = await supabaseClient.storage.from('confessions').upload(path, file);
+  if (error) {
+    showModal(`⚠️ Upload failed: ${error.message}`);
+    modalUploadBtn.textContent = "Upload";
+    modalUploadBtn.disabled = false;
+    return;
+  }
+  const url = `${SUPABASE_URL}/storage/v1/object/public/confessions/${path}`;
+  try {
+    await addDoc(confessionCol, {
+      text: '',
+      userId: currentUserId,
+      imageURL: url,
+      likes: 0,
+      createdAt: Date.now(),
+      status: 'pending',
+      posted: false,
+      replies: [],
+      reports: 0
+    });
+    showModal("✅ Image uploaded (pending)");
+    uploadModal.style.display = 'none';
+    fetchFeed();
+  } catch (e) {
+    console.error(e);
+    showModal("⚠️ Could not save to Firestore");
+  } finally {
+    modalUploadBtn.textContent = "Upload";
+    modalUploadBtn.disabled = false;
+    resetUploadModal();
+  }
+});
+
+// ------------------- INIT -------------------
+sendBtn.addEventListener('click', sendConfession);
+input.addEventListener('input', refreshSendBtn);
+input.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendConfession();
+  }
+});
+window.addEventListener('load', () => {
+  if (localStorage.getItem(COOLDOWN_KEY)) {
+    updateCooldown();
+    cooldownInterval = setInterval(updateCooldown, 1000);
+  }
+  refreshSendBtn();
+
+  // wait for auth to be ready
+  const waitAuth = () => {
+    if (currentUserId) {
+      fetchFeed();
+    } else {
+      setTimeout(waitAuth, 100); // check every 100ms
+    }
+  };
+  waitAuth();
+});
+
+
+// expose globally
+window.likePost = likePost;
+window.deletePost = deletePost;
+window.reportPost = reportPost;
+window.sendConfession = sendConfession;

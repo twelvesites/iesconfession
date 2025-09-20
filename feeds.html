@@ -6,9 +6,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap" rel="stylesheet">
   <title>Feeds - IES TEA</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+
 
 </head>
 <body>
@@ -23,8 +25,11 @@
   </div>
 
 
-<h1 id="head-text">CONFESSIONS!</h1>
+<h1 id="head-text">CONFESSIONS</h1>
 <p class="descript">AI-Powered Confessions to provide safe environment to the students.</p>
+<div id="feedLoader" class="loader" style="display:none;">
+  <img src="https://static.wixstatic.com/media/68315b_30dbad1140034a3da3c59278654e1655~mv2.gif" alt="Loading..." />
+</div>
 <div id="confessionFeed" aria-label="Confession feed"></div>
 <br>
 
@@ -34,18 +39,45 @@
     <button id="modalClose">Okay</button>
   </div>
 </div>
+<div id="uploadModal" class="modal">
+  <center>
+    <div class="modal-content">
+      <span id="closeUploadModal" class="close">&times;</span>
+      <h3>Upload Image</h3>
+      <p class="upload-instructions">File size: less than 20 MB. Square images are recommended for Instagram posts.</p>
+
+      <!-- File input -->
+      <!-- Hide the native input and use a label -->
+<input type="file" id="modalFileInput" accept="image/*">
+<label for="modalFileInput" class="choose-btn">Choose File</label>
+
+
+      <!-- Preview (hidden initially) -->
+      <div id="previewContainer" class="preview-container">
+        <img id="imagePreview" src="" alt="Preview">
+      </div>
+
+      <!-- Upload button (hidden initially) -->
+      <div class="modal-buttons">
+        <button id="modalUploadBtn" style="display:none;">Upload</button>
+      </div>
+    </div>
+  </center>
+</div>
+
 
 
 <div id="inputBar" aria-label="New confession input">
   <textarea id="confessionInput" placeholder="Type your confession..." aria-label="Confession input"></textarea>
-  <button id="sendBtn" disabled>Send</button>
+<button id="openUploadModal">📷</button>
+  <button id="sendBtn" disabled>POST</button>
+
 </div>
 <div id="modal">
   <div id="modalMessage" style="font-weight: 600; color: #e11d48;""></div>
 </div>
 
-<script type="module" src="js/feeds.js">
-</script>
+
 
 
 <script>
@@ -69,6 +101,7 @@ function showModal(message) {
 
 
 
-
+<script type="module" src="js/feeds.js"></script>
+<script type="module" src="js/upload.js"></script>
 </body>
 </html>

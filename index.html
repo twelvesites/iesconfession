@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <title>IES Confession</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
-
-</head>
-<style>
+  <title>IES Tea ☕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Bangers&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Global Styles ===== */
     * {
       margin: 0;
       padding: 0;
@@ -19,74 +20,264 @@
       scroll-behavior: smooth;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0e0e0e;
-      color: #fff;
-      line-height: 1.6;
+ 
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
+   
+    /* ===== Hero Section ===== */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      min-height: 100vh;
+      padding: 0 50px;
+      background: linear-gradient(160deg, #1a001f, #4b0073);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      
+      animation: slideInLeft 1s ease-out forwards;
+    }
+
+    .hero-text h1 {
+      font-family: "Bitcount", system-ui;
+      font-weight: 400;
+      font-size: 4rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #c8a8d4, #7923b7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      opacity: 0;
+      animation: fadeIn 2s 1s forwards;
+    }
+
+    .hero-text .cta-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 35px;
+      background: #9b59b6;
+      border-radius: 50px;
+      font-weight: 600;
+      color: #fff;
+      transition: all 0.3s;
+      box-shadow: 0 0 10px #9b59b6;
+    }
+
+    .hero-text .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #9b59b6, 0 0 40px #6a0dad;
+    }
+
+    .hero img {
+      width: 400px;
+      max-width: 90%;
+      animation: slideInRight 1s ease-out forwards;
+    }
+
+    /* ===== Sections ===== */
     section {
       padding: 100px 20px;
       display: flex;
-      align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
     }
 
-    
+    section h2 {
+      font-size: 2.5rem;
+      font-family: "Bitcount", system-ui;
+      font-weight: 400;
+      margin-bottom: 30px;
+      color: #9b59b6;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
 
-    
+    section p {
+      max-width: 700px;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      opacity: 0;
+      animation: fadeIn 1s 0.5s forwards;
+    }
+
+    /* ===== Rules Section ===== */
+    .rules-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 50px;
+    }
+
+    .rule-card {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .rule-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #9b59b6;
+    }
+
+    .rule-card li {
+      list-style: none;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .accept-btn {
+      margin-top: 50px;
+      padding: 15px 35px;
+      border-radius: 50px;
+      background: #9b59b6;
+      color: #fff;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-block;
+      box-shadow: 0 0 10px #9b59b6;
+    }
+
+    .accept-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #9b59b6, 0 0 40px #6a0dad;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes slideInLeft {
+      0% {opacity: 0; transform: translateX(-50px);}
+      100% {opacity: 1; transform: translateX(0);}
+    }
+
+    @keyframes slideInRight {
+      0% {opacity: 0; transform: translateX(50px);}
+      100% {opacity: 1; transform: translateX(0);}
+    }
+
+    @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+    .terms-box {
+  max-width: 700px;
+  max-height: 250px; /* scrollable if content exceeds */
+  overflow-y: auto;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  padding: 20px 25px;
+  margin: 20px auto;
+  text-align: left;
+  box-shadow: 0 0 10px #9b59b6;
+  transition: all 0.3s;
+}
+
+.terms-box ul {
+  list-style: none;
+}
+
+.terms-box li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.terms-box li:last-child {
+  border-bottom: none;
+}
+
+.terms-box li:hover {
+  background: rgba(155,89,182,0.1);
+  border-radius: 8px;
+}
+
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column-reverse;
+        padding: 50px 20px;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+      }
+
+      .hero-text p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero img {
+        width: 80%;
+      }
+
+      .rule-card {
+        width: 90%;
+      }
+    }
   </style>
+</head>
 <body>
 
  <div class="navbar">
         <a href="index.html"><img src="images/logo.png" alt="twelve"></a>
         <div class="nav-links">
-            <a href="index.html" style="color: #00dbff;">Home</a>
+            <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="contact.html">Feedback</a>
         </div>
   </div>
 
-
- <section class="hero" id="top">
+  <!-- Hero Section -->
+  <section class="hero" id="top">
     <div class="hero-text">
       <h1>Welcome to IES Tea ☕</h1>
-      <p>An AI-moderated space for IES students to vent, confess, and drop the hottest tea — safely. 💬🤖</p>
+      <p>An AI-moderated space for IES students to vent, confess, and spill the hottest tea — safely. 💬🤖</p>
+      <a href="#rules" class="cta-btn">Enter the Tea Room ☕</a>
     </div>
-    <img src="images/illustration.png" alt="Chat Illustration" />
+    <img src="images/illustration.png" alt="Chat Illustration">
   </section>
 
-  <!-- Gossip Info Section -->
-  <section class="section" id="about">
-    <div>
-      <h2>What’s this about? 👀</h2>
-      <p>
-        This platform is built for IES students — a safe, anonymous corner to spill thoughts, rants, confessions, or even some juicy gossip 👀. Yes, there's drama, but there's zero room for hate, harassment, or bullying.  
-        Every post goes through AI moderation 🧠✨ to keep things respectful. It’s your space to be real — just don’t use it to harm others.
-        <br>We’re here to vibe, not to violate. ✌️
-      </p>
-    </div>
+  <!-- About Section -->
+  <section id="about">
+    <h2>What’s This About? 👀</h2>
+    <p>This platform is built for IES students — a safe, anonymous corner to spill thoughts, rants, confessions, or even some juicy gossip 👀. Every post is AI-moderated to keep things fun, real, and safe. It’s your space to vibe, vent, and be yourself ✌️</p>
   </section>
 
-      <section class="section conduct" id="rules">
-    <div>
-      <h2>📜 Code of Conduct</h2>
-<ul>
-  <li>💬 <strong>Your Voice Matters:</strong> This platform is for honest, anonymous expression — feel free to vent, confess, or share what's on your mind.</li>
-  <li>🤖 <strong>AI Moderated:</strong> All confessions go through AI checks to catch anything harmful, offensive, or unsafe before it's posted.</li>
-  <li>❌ <strong>No Bullying or Hate:</strong> Attacks, insults, threats, or targeting others will get removed.</li>
-  <li>🔞 <strong>Keep It Clean-ish:</strong> We allow rants and real talk, but no NSFW, abusive, or explicit content.</li>
-  <li>🔍 <strong>No Exposing:</strong> Don’t use this space to reveal secrets, spread rumors, or stir unnecessary drama that puts others at risk.</li>
-  <li>🚨 <strong>Report It:</strong> If a confession targets you, makes you uncomfortable, or feels wrong — report it immediately. We’ll take action.</li>
-  <li>🏫 <strong>Respect the School Space:</strong> This is still a student platform. Don’t post anything that could seriously harm someone’s well-being or reputation.</li>
-</ul>
-
-      <center><a href="feeds.html" class="accept-btn">Accept & Enter ☕</a></center>
-    </div>
-  </section>    
-<script type="module" src="js/analytics.js"></script>
+  <section class="rules" id="rules">
+  <h2>📜 Code of Conduct</h2>
+  <div class="terms-box">
+    <ul>
+      <li>💬 <strong>No Harassment:</strong> Don’t target, bully, or attack others. Keep it safe.</li>
+      <li>🔞 <strong>Keep It Appropriate:</strong> No NSFW texts, images, or links.</li>
+      <li>🚫 <strong>No Misuse:</strong> Don’t expose secrets, spam, or troll.</li>
+      <li>🤖 <strong>AI-Moderated:</strong> Posts go through AI checks, so stay respectful.</li>
+      <li>🏫 <strong>Respect the Space:</strong> This is for IES students—don’t ruin someone’s reputation or wellbeing.</li>
+    </ul>
+  </div>
+    <a href="feeds.html" class="accept-btn">Accept & Enter ☕</a>
+  </section>
 
 </body>
 </html>

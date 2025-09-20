@@ -2,6 +2,7 @@
     .nav-links a {
         font-size: 0.875rem;
     }
+   
     .nav-links {
         gap: 10px;
     }
@@ -32,6 +33,7 @@
 #head {
     margin-top: 80px;
     display: flex;
+
     text-align: center;
     flex-direction: column;
     align-items: stretch;
@@ -53,6 +55,7 @@
     }
     #sendBtn {
     font-size: 0.875rem;
+    padding: 0 1rem;
 }
 #confessionInput {
     flex: 1;
@@ -92,6 +95,30 @@
     font-size: 0.875rem;
     color: #ccc;
 }
+#openUploadModal {
+    border: none;
+    color: white;
+    padding: 0px 1rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s 
+ease;
+    flex-shrink: 0;
+}
+.confession-image {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;     /* keeps the whole image visible */
+  border-radius: 10px;
+  align-self: center;      /* centers in the flex column */
+}
+#inputBar {
+    padding: 1rem 0.5rem;
+    gap: 0.3rem;
+}
+
 }
 
 
@@ -115,7 +142,7 @@
         width: 80px;
     }
     #head-text {
-    font-size: 55px;
+    font-size: 2.5rem;
 }
 .descript {
     font-size: 13px;

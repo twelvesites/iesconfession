@@ -3,15 +3,17 @@ import os
 import json
 import warnings
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from io import BytesIO
 import textwrap
+import requests
+from PIL import Image, ImageDraw, ImageFont
 import firebase_admin
 from firebase_admin import credentials, firestore
 from instagrapi import Client
 from dotenv import load_dotenv
 
 # --------------------------
-# Load .env variables
+# Load .env / GitHub secrets
 # --------------------------
 load_dotenv()
 IG_USERNAME = os.environ.get("IG_USERNAME")
@@ -70,25 +72,23 @@ print("✅ Connected to Firebase Firestore!")
 # Template & font paths
 # --------------------------
 BASE_DIR = Path(__file__).parent
-TEMPLATE_PATH = BASE_DIR / "template.png"
+TEXT_TEMPLATE_PATH = BASE_DIR / "template.png"
+IMAGE_TEMPLATE_PATH = BASE_DIR / "tempimage.png"
 OUTPUT_DIR = BASE_DIR / "cards"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-FONT_PATH = BASE_DIR / "SourceSansPro-Black.ttf"  # Bold font
-EMOJI_DIR = BASE_DIR / "joypixels"  # JoyPixels PNGs
+FONT_PATH = BASE_DIR / "SourceSansPro-Black.ttf"
+EMOJI_DIR = BASE_DIR / "joypixels"
 
 LINE_SPACING = 8
 MAX_FONT_SIZE = 60
 MIN_FONT_SIZE = 18
-
-# CSS-like margin (top, right, bottom, left)
 MARGIN = {"top": 140, "right": 5, "bottom": 140, "left": 5}
+UNICODE_EMOJI = {"😂","😭","❤️","👍","😎","😊","😅","🥲","🥰","😢","😍","🤔","🤣","🎀","🙂"}
 
 # --------------------------
 # Emoji helpers
 # --------------------------
-UNICODE_EMOJI = {"😂","😭","❤️","👍","😎","😊","😅","🥲","🥰","😢","😍","🤔","🤣","🎀","🙂"}
-
 def is_emoji(char):
     return char in UNICODE_EMOJI or ord(char) > 0x1F000
 
@@ -97,90 +97,82 @@ def get_emoji_path(char):
     path = EMOJI_DIR / f"{hex_code}.png"
     return path if path.exists() else None
 
-# --------------------------
-# Measure text size
-# --------------------------
 def measure_text_size(font, text):
     bbox = font.getbbox(text)
-    width = bbox[2] - bbox[0]
-    height = bbox[3] - bbox[1]
-    return width, height
+    return bbox[2]-bbox[0], bbox[3]-bbox[1]
 
 # --------------------------
-# Generate confession card
+# Generate card
 # --------------------------
-def generate_card(confession_text: str, output_name: str):
-    template = Image.open(TEMPLATE_PATH).convert("RGBA")
-    draw = ImageDraw.Draw(template)
-    template_width, template_height = template.size
+def generate_card(confession_text: str, image_url: str, output_name: str) -> Path:
+    # Load base image
+    if image_url:
+        try:
+            response = requests.get(image_url)
+            response.raise_for_status()
+            base_img = Image.open(BytesIO(response.content)).convert("RGBA")
+        except Exception as e:
+            print(f"❌ Failed to download image: {e}")
+            base_img = Image.new("RGBA", (1080, 1080), (0, 0, 0, 255))
+    else:
+        base_img = Image.open(TEXT_TEMPLATE_PATH).convert("RGBA")
 
-    # Safe area boundaries
-    safe_left = MARGIN["left"]
-    safe_top = MARGIN["top"]
-    safe_right = template_width - MARGIN["right"]
-    safe_bottom = template_height - MARGIN["bottom"]
+    # Overlay template properly
+    try:
+        template = Image.open(IMAGE_TEMPLATE_PATH).convert("RGBA")
+        scale_w = base_img.width / template.width
+        scale_h = base_img.height / template.height
+        scale_factor = min(scale_w, scale_h)
+        new_size = (int(template.width * scale_factor), int(template.height * scale_factor))
+        template = template.resize(new_size, Image.Resampling.LANCZOS)
+        x = (base_img.width - template.width) // 2
+        y = (base_img.height - template.height) // 2
+        base_img.paste(template, (x, y), template)
+    except Exception as e:
+        print(f"❌ Failed to apply image template: {e}")
 
-    safe_width = safe_right - safe_left
-    safe_height = safe_bottom - safe_top
-
-    font_size = MAX_FONT_SIZE
-    font = ImageFont.truetype(str(FONT_PATH), font_size)
-
-    # -------------------
-    # Shrink font until text fits inside safe area
-    # -------------------
-    while True:
-        wrap_width = max(int(safe_width / font_size * 1.8), 10)
-        wrapped = textwrap.fill(confession_text, width=wrap_width)
-        lines = wrapped.split("\n")
-        total_h = sum(measure_text_size(font, line)[1] + LINE_SPACING for line in lines)
-
-        if total_h <= safe_height or font_size <= MIN_FONT_SIZE:
-            break
-
-        font_size = max(int(font_size * 0.9), MIN_FONT_SIZE)
+    # Draw text
+    if confession_text:
+        draw = ImageDraw.Draw(base_img)
+        w, h = base_img.size
+        font_size = MAX_FONT_SIZE
         font = ImageFont.truetype(str(FONT_PATH), font_size)
+        safe_w = w - MARGIN["left"] - MARGIN["right"]
+        safe_h = h - MARGIN["top"] - MARGIN["bottom"]
 
-    # Vertical starting point for exact center
-    y = safe_top + (safe_height - total_h) // 2
+        while True:
+            wrap_width = max(int(safe_w / font_size * 1.8), 10)
+            lines = textwrap.fill(confession_text, width=wrap_width).split("\n")
+            total_h = sum(measure_text_size(font, l)[1] + LINE_SPACING for l in lines)
+            if total_h <= safe_h or font_size <= MIN_FONT_SIZE:
+                break
+            font_size = max(int(font_size * 0.9), MIN_FONT_SIZE)
+            font = ImageFont.truetype(str(FONT_PATH), font_size)
 
-    # -------------------
-    # Draw lines and emojis
-    # -------------------
-    for line in lines:
-        line_width = 0
-        for char in line:
-            if is_emoji(char):
-                emoji_path = get_emoji_path(char)
-                line_width += font_size if emoji_path else measure_text_size(font, char)[0]
-            else:
-                line_width += measure_text_size(font, char)[0]
-
-        x = safe_left + (safe_width - line_width) // 2
-
-        for char in line:
-            if is_emoji(char):
-                emoji_path = get_emoji_path(char)
-                if emoji_path:
-                    emoji_img = Image.open(emoji_path).convert("RGBA")
-                    emoji_img = emoji_img.resize((font_size, font_size), Image.Resampling.LANCZOS)
-                    template.paste(emoji_img, (x, y), emoji_img)
-                    x += font_size
+        y = MARGIN["top"] + (safe_h - total_h) // 2
+        for line in lines:
+            line_width = sum(font_size if is_emoji(c) else measure_text_size(font, c)[0] for c in line)
+            x = MARGIN["left"] + (safe_w - line_width) // 2
+            for char in line:
+                if is_emoji(char):
+                    emoji_path = get_emoji_path(char)
+                    if emoji_path:
+                        em_img = Image.open(emoji_path).convert("RGBA")
+                        em_img = em_img.resize((font_size, font_size), Image.Resampling.LANCZOS)
+                        base_img.paste(em_img, (x, y), em_img)
+                        x += font_size
+                    else:
+                        w_c, _ = measure_text_size(font, char)
+                        draw.text((x, y), char, font=font, fill=(210, 140, 255))
+                        x += w_c
                 else:
-                    w, _ = measure_text_size(font, char)
-                    draw.text((x, y), char, font=font, fill=(255, 221, 206))
-                    draw.text((x + 1, y), char, font=font, fill=(255, 221, 206))
-                    x += w
-            else:
-                w, _ = measure_text_size(font, char)
-                draw.text((x, y), char, font=font, fill=(255, 221, 206))
-                draw.text((x + 1, y), char, font=font, fill=(255, 221, 206))
-                x += w
-
-        y += font_size + LINE_SPACING
+                    w_c, _ = measure_text_size(font, char)
+                    draw.text((x, y), char, font=font, fill=(210, 140, 255))
+                    x += w_c
+            y += font_size + LINE_SPACING
 
     out_path = OUTPUT_DIR / f"{output_name}.png"
-    template.save(out_path, format="PNG")
+    base_img.save(out_path, format="PNG")
     return out_path
 
 # --------------------------
@@ -189,7 +181,7 @@ def generate_card(confession_text: str, output_name: str):
 def post_new_confessions(limit: int = 3):
     print("🔍 Fetching unposted confessions...")
     docs = list(
-        db.collection("newconfessions")
+        db.collection("confession")
         .where("posted", "==", False)
         .limit(limit)
         .stream()
@@ -202,12 +194,14 @@ def post_new_confessions(limit: int = 3):
     for doc in docs:
         data = doc.to_dict()
         text = data.get("text", "").strip()
-        if not text:
+        image_url = data.get("imageURL", "").strip()
+        status = data.get("status", "")
+        if not text and not image_url:
             continue
 
         try:
             file_name = f"{doc.id}"
-            card_path = generate_card(text, file_name)
+            card_path = generate_card(text, image_url if status=="approved" else "", file_name)
             caption = "Anonymous confession 💌"
             media = cl.photo_upload(str(card_path), caption=caption)
             print(f"✅ Posted confession: {text[:50]}...")
